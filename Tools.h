@@ -16,7 +16,6 @@ struct Pixels{
     int r, g, b;
 };
 
-<<<<<<< HEAD
 struct Lighting{
     double ka,kd,ks, n;
 };
@@ -24,22 +23,13 @@ struct Coordinates{
     double x, y, z;
     Pixels color;
     Lighting lighting;
-=======
-struct Coordinates{
-    double x, y, z;
-    Pixels color;
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
-  //  Coordinates*next;
-
 };
+
 
 struct SphereCoordinates{
     Coordinates center;
     double r;
-<<<<<<< HEAD
     Lighting lighting;
-=======
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
     //  Coordinates*next;
     
 };
@@ -68,7 +58,6 @@ double round(double d)
         return floor(d);
 }
 
-<<<<<<< HEAD
 double dotProduct(Coordinates nVector, Coordinates lightRay)
 {
     double dotProd;
@@ -79,18 +68,13 @@ double dotProduct(Coordinates nVector, Coordinates lightRay)
     
 }
 
-=======
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
 int newRound(double d)
 {
     return (int)d;
 }
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
 vector<Coordinates> roundVectorPoints(vector <Coordinates> points)
 {
     for(int i =0;i<points.size();i++)
@@ -126,7 +110,6 @@ Coordinates AssignCoordinates3d(double x, double y, double z)
     return coordinates;
 }
 
-<<<<<<< HEAD
 Coordinates multiplyVectors(Coordinates nVector, Coordinates lightRay)
 {
     Coordinates newVector;
@@ -164,8 +147,7 @@ Coordinates subtractVectors(Coordinates v1, Coordinates v2)
 {
     return AssignCoordinates3d(v1.x-v2.x, v1.y-v2.y, v1.z-v2.z);
 }
-=======
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
+    
 Coordinates convert3dTo2d(double x, double y, double z, int d)
 {
     Coordinates coordinates;
@@ -199,7 +181,6 @@ Coordinates AssignPointsAndColor(Coordinates point, Pixels color)
     
     return coordinates;
 }
-<<<<<<< HEAD
 
 Coordinates AssignPointsAndColorAndLighting(Coordinates point, Pixels color, double ka,double kd, double ks, double n)
 {
@@ -217,9 +198,6 @@ Coordinates AssignPointsAndColorAndLighting(Coordinates point, Pixels color, dou
     return coordinates;
 }
 SphereCoordinates AssignSphereWithLighting(Coordinates point, double r, Pixels color, double ka,double kd, double ks, double n )
-=======
-SphereCoordinates AssignSphere(Coordinates point, double r, Pixels color)
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
 {
     SphereCoordinates s;
     s.center.x = point.x;
@@ -227,18 +205,14 @@ SphereCoordinates AssignSphere(Coordinates point, double r, Pixels color)
     s.center.z = point.z;
     s.r = r;
     s.center.color = color;
-<<<<<<< HEAD
     s.lighting.ka = ka;
     s.lighting.kd = kd;
     s.lighting.ks = ks;
     s.lighting.n = n;
-=======
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
     
     return s;
 }
 
-<<<<<<< HEAD
 SphereCoordinates AssignSphere(Coordinates point, double r, Pixels color )
 {
     SphereCoordinates s;
@@ -251,17 +225,11 @@ SphereCoordinates AssignSphere(Coordinates point, double r, Pixels color )
     return s;
 }
 
-
-=======
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
 Window ViewWindow(Coordinates tl, Coordinates br) {
     Window window;
     window.tl = tl;
     window.br = br;
     return window;
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
 #endif /* Tools_h */

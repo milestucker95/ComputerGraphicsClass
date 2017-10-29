@@ -29,7 +29,6 @@ void testingLighting(){
     
     cout << "Running...." << endl;
     Pixels color1 = AssignPixels(255, 255, 255),color2  = AssignPixels(255, 255, 0),color3 = AssignPixels(255, 0, 0),color4 = AssignPixels(0, 255, 0);
-<<<<<<< HEAD
     double pka = 0.2,pkd = 0.6,pks = 0.25,pn = 5;
     double ska = 0.2,skd = 0.6,sks = 0.25,sn = 10;
 
@@ -37,89 +36,57 @@ void testingLighting(){
     
     vector<Coordinates>polygon1;
     polygon1.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color1, pka,pkd,pks,pn));
-=======
-    vector<vector<Coordinates>>polygon;
     
-    vector<Coordinates>polygon1;
-    polygon1.push_back(AssignPointsAndColor(AssignCoordinates3d(0,0,0),color1));
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
     polygon1.push_back(AssignCoordinates3d(100,0,0));
     polygon1.push_back(AssignCoordinates3d(100,0,100));
     polygon1.push_back(AssignCoordinates3d(0,0,100));
     
     vector<Coordinates>polygon2;
-<<<<<<< HEAD
     polygon2.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color1, pka,pkd,pks,pn));
-=======
-    polygon2.push_back(AssignPointsAndColor(AssignCoordinates3d(0,0,0),color1));
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
     polygon2.push_back(AssignCoordinates3d(0,100,0));
     polygon2.push_back(AssignCoordinates3d(0,100,100));
     polygon2.push_back(AssignCoordinates3d(0,0,100));
     
     vector<Coordinates>polygon3;
-<<<<<<< HEAD
     polygon3.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color1, pka,pkd,pks,pn));
-=======
-    polygon3.push_back(AssignPointsAndColor(AssignCoordinates3d(0,0,0),color1));
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
     polygon3.push_back(AssignCoordinates3d(0,100,0));
     polygon3.push_back(AssignCoordinates3d(100,100,0));
     polygon3.push_back(AssignCoordinates3d(100,0,0));
     
     vector<Coordinates>polygon4;
-<<<<<<< HEAD
     polygon4.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(10,30,85),color2, pka,pkd,pks,pn));
-=======
-    polygon4.push_back(AssignPointsAndColor(AssignCoordinates3d(10,30,85),color2));
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
     polygon4.push_back(AssignCoordinates3d(70,30,85));
     polygon4.push_back(AssignCoordinates3d(70,30,5));
     polygon4.push_back(AssignCoordinates3d(10,30,5));
     
     vector<Coordinates>polygon5;
-<<<<<<< HEAD
     polygon5.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(60,0,80),color2, pka,pkd,pks,pn));
-=======
-    polygon5.push_back(AssignPointsAndColor(AssignCoordinates3d(60,0,80),color2));
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
     polygon5.push_back(AssignCoordinates3d(60,30,80));
     polygon5.push_back(AssignCoordinates3d(60,30,10));
     polygon5.push_back(AssignCoordinates3d(60,0,10));
     
     vector<Coordinates>polygon6;
-<<<<<<< HEAD
     polygon6.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(20,0,80),color2, pka,pkd,pks,pn));
-=======
-    polygon6.push_back(AssignPointsAndColor(AssignCoordinates3d(20,0,80),color2));
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
     polygon6.push_back(AssignCoordinates3d(20,30,80));
     polygon6.push_back(AssignCoordinates3d(20,30,10));
     polygon6.push_back(AssignCoordinates3d(20,0,10));
+    
     polygon.push_back(polygon1);
     polygon.push_back(polygon2);
     polygon.push_back(polygon3);
     polygon.push_back(polygon4);
     polygon.push_back(polygon5);
     polygon.push_back(polygon6);
-<<<<<<< HEAD
 
-=======
     
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
     double r = 20;
     double r2 = 10;
     int sf = 2;
     vector<SphereCoordinates> sphere;
-<<<<<<< HEAD
     SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(50, 80, 50), r, color3, 0.2,0.6,0.25,sn);
     
     SphereCoordinates sphere2 = AssignSphereWithLighting(AssignCoordinates3d(80, 50, 70), r2, color4, 0.2,0.6,0.25,sn);
-=======
-    SphereCoordinates sphere1 = AssignSphere(AssignCoordinates3d(50, 80, 50), r, color3);
-    
-    SphereCoordinates sphere2 = AssignSphere(AssignCoordinates3d(80, 50, 70), r2, color4);
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
+
     
     sphere.push_back(sphere1);
     sphere.push_back(sphere2);
@@ -128,10 +95,8 @@ void testingLighting(){
     Coordinates lightSource = AssignCoordinates3d(200, 200, 50);
     Coordinates vrP = AssignCoordinates3d(50, 50, 120);
     info.setVRP(vrP);
-<<<<<<< HEAD
     info.setLightSource(lightSource);
-=======
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
+
     Coordinates coP = AssignCoordinates3d(0, 0, 50);
     double alpha = 0,beta = 0;
     Window w = ViewWindow(AssignCoordinates3d(-30, 30,0), AssignCoordinates3d(30, -30, 0));
@@ -148,7 +113,6 @@ void testingLighting(){
     image.uniformColor(245, 245, 245);
     image.DrawEnvironment(pixels);
 
-<<<<<<< HEAD
     image.writePPM("environment.jpg");
     cout << "Finished"<< endl;
     
@@ -156,11 +120,8 @@ void testingLighting(){
     info.DiffuseReflection(40, 28, 75, 0.6, AssignCoordinates3d(0, 0, 0), AssignCoordinates3d(0, 0, 0), AssignCoordinates3d(0, 0, 0));
     //info.specularReflection(0, 0, 20, 0.25, 10, AssignCoordinates3d(0, 0, 0), AssignCoordinates3d(0, 0, 0), AssignCoordinates3d(0, 0, 0));
       */
-=======
-    image.writePPM("environment.ppm");
-    cout << "Finished"<< endl;
 
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
+
 }
 
 

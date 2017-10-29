@@ -19,7 +19,6 @@ private:
     vector<vector<Coordinates>>polygons;
     vector<SphereCoordinates> spheres;
     double radius;
-<<<<<<< HEAD
     double xL, yL;
     double dn;
     Coordinates vrP;
@@ -27,14 +26,6 @@ private:
     Coordinates LightSource;
     int r,g,b;
     
-=======
-    double xMin, xMax, yMin, yMax, xL, yL;
-    double dn;
-    Coordinates vrP;
-    vector<Coordinates> windowCorners;
-    Window window;
-
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
 public:
     struct NVector{
         double A, B, C,D;
@@ -42,7 +33,7 @@ public:
     };
     vector<Coordinates> Intersections;
     vector<Coordinates> totalPoints;
-
+    
     
     LightingUtils(vector<vector<Coordinates>> polys, vector<SphereCoordinates>sphs)
     {
@@ -56,13 +47,13 @@ public:
         Coordinates VPoints12;
         VPoints12 = AssignCoordinates3d(points[1].x-points[0].x, points[1].y-points[0].y, points[1].z-points[0].z);
         VPoints13 = AssignCoordinates3d(points[2].x-points[0].x, points[2].y-points[0].y, points[2].z-points[0].z);
-
+        
         nVector.A = VPoints13.y * VPoints12.z - VPoints13.z * VPoints12.y;
         nVector.B = VPoints13.z * VPoints12.x - VPoints13.x * VPoints12.z;
         nVector.C = VPoints13.x * VPoints12.y - VPoints13.y * VPoints12.x;
-
+        
         nVector.D = -((nVector.A * points[0].x) + (nVector.B * points[0].y) + (nVector.C * points[0].z));
-
+        
         return nVector;
     }
     
@@ -71,9 +62,9 @@ public:
         if(abs(nVector.A)>= abs(nVector.B) && abs(nVector.A) >= abs(nVector.C))return 'A';
         else if(abs(nVector.B) >= abs(nVector.A) && abs(nVector.B) >= abs(nVector.C))return 'B';
         else return 'C';
-
+        
     }
-   
+    
     vector<Coordinates> AssignMultiplePointsToPolygonPlane(vector<Coordinates>points, char plane)
     {
         if(plane == 'A')
@@ -83,7 +74,7 @@ public:
                 points[i].x = points[i].y;
                 points[i].y = points[i].z;
                 points[i].z = 0;
-
+                
             }
         }
         
@@ -93,7 +84,7 @@ public:
             {
                 points[i].x = points[i].x;
                 points[i].y = points[i].z;
-
+                
             }
         }
         
@@ -101,33 +92,33 @@ public:
             for(int i = 0 ; i<points.size();i++)
             {
                 points[i].z = 0;
-
+                
             }
         }
         
         return points;
     }
-
+    
     Coordinates AssignPointToPlane(Coordinates points, char plane)
     {
         if(plane == 'A')
         {
-                points.x = points.y;
-                points.y = points.z;
-                points.z = 0;
+            points.x = points.y;
+            points.y = points.z;
+            points.z = 0;
         }
         
         else if(plane == 'B')
         {
-                points.x = points.x;
-                points.y = points.z;
+            points.x = points.x;
+            points.y = points.z;
         }
         
         else{
-
-                points.z = 0;
+            
+            points.z = 0;
         }
-
+        
         return points;
     }
     
@@ -152,7 +143,7 @@ public:
                 double t = (testPoint.y - points[n-1].y)/(points[n].y - points[n-1].y);
                 double i = points[n-1].x + t * (points[n].x - points[n-1].x);
                 double j = points[n-1].y + t * (points[n].y - points[n-1].y);
-
+                
                 if(t>=0 && t<=1)
                 {
                     if(i>=testPoint.x)countRight+=1;
@@ -163,7 +154,7 @@ public:
         
         if(points[size].y != points[0].y)
         {
-        
+            
             double t = (testPoint.y - points[size].y)/(points[0].y - points[size].y);
             double i = points[size].x + t * (points[0].x - points[size].x);
             double j = points[size].y + t * (points[0].y - points[size].y);
@@ -186,12 +177,12 @@ public:
         double A, B,C;
         A = pow((currentWindow.x - coP.x),2.0) + pow((currentWindow.y - coP.y),2.0) + pow((currentWindow.z - coP.z),2.0);
         B = 2.0 * ((currentWindow.x - coP.x)*(coP.x - sphere.center.x) + (currentWindow.y - coP.y)*(coP.y - sphere.center.y)
-        + (currentWindow.z - coP.z)*(coP.z - sphere.center.z));
+                   + (currentWindow.z - coP.z)*(coP.z - sphere.center.z));
         C = pow((coP.x - sphere.center.x),2.0) + pow((coP.y - sphere.center.y),2.0) + pow((coP.z - sphere.center.z),2.0) - pow(r,2.0);
         
-         double t1 = (-B + sqrt( pow(B,2.0) - (4.0 * A * C)))/(2.0*A);
+        double t1 = (-B + sqrt( pow(B,2.0) - (4.0 * A * C)))/(2.0*A);
         double t2 = (-B - sqrt( pow(B,2.0) - (4.0 * A * C)))/(2.0*A);
-
+        
         if((pow(B,2.0) - (4 * A * C)>=0) && t1>=0 && t2>=0)
         {
             if(t1>0 && t2>0 && t1!=t2)
@@ -201,17 +192,13 @@ public:
                 else min = t2;
                 
                 double x,y,z;
-<<<<<<< HEAD
                 //cout << "current window: " << currentWindow.x << " " << currentWindow.y << " " << currentWindow.z << endl;
                 //cout << "sphere t: " << min << endl;
-=======
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
                 x = coP.x + min * (currentWindow.x - coP.x);
                 y = coP.y + min * (currentWindow.y - coP.y);
                 z = coP.z + min * (currentWindow.z - coP.z);
                 //cout << "x : " << x << " y: " << y << " z: " << z << endl;
                 Coordinates newPoint = AssignPointsAndColor(AssignCoordinates3d(x, y, z), sphere.center.color);
-<<<<<<< HEAD
                 double pa,pd,ps;
                 pa = AmbientLight(sphere.lighting.ka, 1);
                 Coordinates nVector = subtractVectors(newPoint, sphere.center);
@@ -221,21 +208,15 @@ public:
                 newPoint.color.g = newPoint.color.g * (pa + pd) + ps;
                 newPoint.color.b = newPoint.color.b * (pa + pd) + ps;
                 //cout << "newPoint : " << newPoint.color.r << " " << newPoint.color.g << " " << newPoint.color.b << endl;
-
-=======
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
+                
                 return newPoint;
-
+                
             }
         }
-<<<<<<< HEAD
         //cout << "int max: " << INT_MAX << endl;
-=======
-        
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
         return AssignPointsAndColor(AssignCoordinates3d(INT_MAX, INT_MAX, INT_MAX), AssignPixels(0, 0, 0));
         
-
+        
     }
     
     
@@ -254,12 +235,11 @@ public:
             x = coP.x + t * (currentWindow.x - coP.x);
             y = coP.y + t * (currentWindow.y - coP.y);
             z = coP.z + t * (currentWindow.z - coP.z);
-<<<<<<< HEAD
             
             Coordinates newPoint = AssignPointsAndColor(AssignCoordinates3d(x, y, z), vertices[0].color);
-
+            
             if(CheckOnSurface(vertices, newPoint, plane)) {
-
+                
                 double pa,pd,ps;
                 pa = AmbientLight(vertices[0].lighting.ka, 1);
                 pd = DiffuseReflection(nVector.A, nVector.B, nVector.C, vertices[0].lighting.kd, currentWindow,newPoint, coP);
@@ -267,16 +247,10 @@ public:
                 newPoint.color.r = newPoint.color.r * (pa + pd) + ps;
                 newPoint.color.g = newPoint.color.g * (pa + pd) + ps;
                 newPoint.color.b = newPoint.color.b * (pa + pd) + ps;
-
+                
                 //cout << "newPoint : " << newPoint.color.r << " " << newPoint.color.g << " " << newPoint.color.b << endl;
-=======
-            Coordinates newPoint = AssignPointsAndColor(AssignCoordinates3d(x, y, z), vertices[0].color);
-            
-            if(CheckOnSurface(vertices, newPoint, plane)) {
-
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
                 return newPoint;
-
+                
             }
         }
         
@@ -288,55 +262,44 @@ public:
         vector<Coordinates>intersections;
         vector<Coordinates>sphereIntersections;
         vector<Coordinates>polygonIntersections;
-
-<<<<<<< HEAD
-        //cout << "current window in Ray tracing: " << currentWindow.x << " " << currentWindow.y << " " << currentWindow.z << endl;
-
-=======
         
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
+        //cout << "current window in Ray tracing: " << currentWindow.x << " " << currentWindow.y << " " << currentWindow.z << endl;
+        
         for(int i = 0; i<spheres.size(); i++)
         {
             intersections.push_back(SphereIntersection(spheres[i], coP, currentWindow, spheres[i].r));
         }
-
+        
         for(int i = 0; i<polys.size(); i++)
         {
             intersections.push_back(PolygonIntersection(polys[i], coP, currentWindow));
         }
-
+        
         Coordinates tempIntersections;
         //find shortest distance of intersections
         if(intersections.size() >0)
         {
-        double min = sqrt(pow(intersections[0].x - coP.x,2.0)+ pow(intersections[0].y - coP.y,2.0) + pow(intersections[0].z - coP.z,2.0));
+            double min = sqrt(pow(intersections[0].x - coP.x,2.0)+ pow(intersections[0].y - coP.y,2.0) + pow(intersections[0].z - coP.z,2.0));
             
-        tempIntersections = intersections[0];
-<<<<<<< HEAD
+            tempIntersections = intersections[0];
             tempIntersections.color = intersections[0].color;
-=======
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
-        for(int i = 1;i<intersections.size();i++)
-        {
-            double d = sqrt(pow(intersections[i].x - coP.x,2.0)+ pow(intersections[i].y - coP.y,2.0) + pow(intersections[i].z - coP.z,2.0));
-            
-            if(d<min)
+            for(int i = 1;i<intersections.size();i++)
             {
-                min = d;
-                tempIntersections = intersections[i];
-                tempIntersections.color = intersections[i].color;
+                double d = sqrt(pow(intersections[i].x - coP.x,2.0)+ pow(intersections[i].y - coP.y,2.0) + pow(intersections[i].z - coP.z,2.0));
+                
+                if(d<min)
+                {
+                    min = d;
+                    tempIntersections = intersections[i];
+                    tempIntersections.color = intersections[i].color;
+                }
             }
-        }
             return tempIntersections;
-
+            
         }
         else
         {
-<<<<<<< HEAD
             return AssignPointsAndColor(currentWindow, AssignPixels(0, 0, 0));
-=======
-            return AssignPointsAndColor(AssignCoordinates3d(-1,-1,-1), AssignPixels(0, 0, 0));
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
         }
     }
     
@@ -345,10 +308,10 @@ public:
         Window dimensions;
         window.tl.z = 0;
         window.br.z = 0;
-
+        
         xL = min(window.tl.x, window.br.x);
         yL = min(window.tl.y, window.br.y);
-
+        
         window.tl.x-=xL;
         window.br.x-=xL;
         window.tl.y-=yL;
@@ -356,56 +319,51 @@ public:
         
         dimensions.tl = AssignCoordinates3d(0, max(window.tl.y, window.br.y), 0);
         dimensions.br = AssignCoordinates3d(max(window.tl.x, window.br.x), 0, 0);
-<<<<<<< HEAD
-=======
-
-
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
         dimensions.pixels = window.pixels;
         
         for (int i = 0; i < dimensions.pixels.size(); i++) {
             Coordinates cur_coord = dimensions.pixels[i];
-
+            
             cur_coord = AssignPointsAndColor(AssignCoordinates3d(cur_coord.x - xL, cur_coord.y - yL, cur_coord.z - 0), cur_coord.color);
             dimensions.pixels[i] = cur_coord;
             
         }
-
+        
         return dimensions;
     }
     
     void ScaleEnvironment(double sf, Coordinates lightSource)
     {
-
+        
         for(int i =0;i<polygons.size();i++)
         {
             for(int j =0;j<polygons[i].size();j++)
             {
-
+                
                 polygons[i][j].x = polygons[i][j].x * sf;
                 polygons[i][j].y = polygons[i][j].y * sf;
                 polygons[i][j].z = polygons[i][j].z * sf;
             }
         }
         
-
+        
         for(int i =0;i<spheres.size();i++)
         {
-                spheres[i].center.x = spheres[i].center.x * sf;
-                spheres[i].center.y = spheres[i].center.y * sf;
-                spheres[i].center.z = spheres[i].center.z * sf;
-                spheres[i].r = spheres[i].r * sf;
+            spheres[i].center.x = spheres[i].center.x * sf;
+            spheres[i].center.y = spheres[i].center.y * sf;
+            spheres[i].center.z = spheres[i].center.z * sf;
+            spheres[i].r = spheres[i].r * sf;
         }
         
-       
+        
         window.tl.x = window.tl.x * sf;
         window.tl.y = window.tl.y * sf;
         window.tl.z = window.tl.z * sf;
         window.br.x = window.br.x * sf;
         window.br.y = window.br.y * sf;
         window.br.z = window.br.z * sf;
-
-
+        
+        
         
         lightSource.x = lightSource.x * sf;
         lightSource.y = lightSource.y * sf;
@@ -415,7 +373,7 @@ public:
     
     Window ChangeZWLocation(Window window, double zw)
     {
-       
+        
         window.tl.z = zw;
         window.br.z = zw;
         
@@ -436,7 +394,7 @@ public:
         
         vector<Transformations3d::UVN> testUVN;
         
-
+        
         for(int i =0;i<polygons.size();i++)
         {
             for(int j = 0;j<polygons[i].size();j++)
@@ -458,7 +416,6 @@ public:
         window.br.z -= viewPlane;
     }
     
-<<<<<<< HEAD
     double AmbientLight(double ka, double I)
     {
         return ka * 1;
@@ -468,13 +425,13 @@ public:
     {
         Coordinates normalVector = AssignCoordinates3d(x, y, z);
         //Coordinates RayVector = AssignCoordinates3d(0, 0, 50);
-
+        
         Coordinates RayVector = subtractVectors(currentWindow, coP);
         double dp = dotProduct(normalVector, RayVector);
         //cout << "dp: " << dp << endl;
         Coordinates LightRay = subtractVectors(LightSource, intersection);
         //Coordinates LightRay = AssignCoordinates3d(0, 50, 35);
-
+        
         double pd;
         double Ils = 1;
         //double kd = 0.6;
@@ -510,101 +467,51 @@ public:
             //cout << "yo" << endl;
             normalVector = negateVector(normalVector);
         }
-       /* double dotProductNormalLightRay = dotProduct(normalVector, LightRay);
-        if (dotProductNormalLightRay/(magnitudeOfVector(LightRay) * magnitudeOfVector(normalVector)))
-            pd = (Ils * kd ) *(dotProductNormalLightRay/(magnitudeOfVector(LightRay) * magnitudeOfVector(normalVector)));
-        else
-            pd = 0;
-        */
+        /* double dotProductNormalLightRay = dotProduct(normalVector, LightRay);
+         if (dotProductNormalLightRay/(magnitudeOfVector(LightRay) * magnitudeOfVector(normalVector)))
+         pd = (Ils * kd ) *(dotProductNormalLightRay/(magnitudeOfVector(LightRay) * magnitudeOfVector(normalVector)));
+         else
+         pd = 0;
+         */
         
         //cout << "d: " <<  pd << endl;
         Coordinates normalVectorDividedByMagnitude = AssignCoordinates3d(normalVector.x/magnitudeOfVector(normalVector), normalVector.y/magnitudeOfVector(normalVector),normalVector.z/magnitudeOfVector(normalVector));
         
-             Coordinates LightRayDividedByMagnitude = AssignCoordinates3d(LightRay.x/magnitudeOfVector(LightRay), LightRay.y/magnitudeOfVector(LightRay),LightRay.z/magnitudeOfVector(LightRay));
+        Coordinates LightRayDividedByMagnitude = AssignCoordinates3d(LightRay.x/magnitudeOfVector(LightRay), LightRay.y/magnitudeOfVector(LightRay),LightRay.z/magnitudeOfVector(LightRay));
         Coordinates RayVectorDividedByMagnitude = AssignCoordinates3d(RayVector.x/magnitudeOfVector(RayVector), RayVector.y/magnitudeOfVector(RayVector),RayVector.z/magnitudeOfVector(RayVector));
         
         Coordinates negateRayVector = negateVector(RayVector);
         Coordinates negatedRayVectorDividedByMagnitude = AssignCoordinates3d(negateRayVector.x/magnitudeOfVector(negateRayVector),negateRayVector.y/magnitudeOfVector(negateRayVector),negateRayVector.z/magnitudeOfVector(negateRayVector));
         double cosine = dotProduct(subtractVectors(scaleVector( scaleVector(normalVectorDividedByMagnitude,2) , dotProduct(normalVectorDividedByMagnitude, LightRayDividedByMagnitude)), LightRayDividedByMagnitude), negatedRayVectorDividedByMagnitude);
-
-       /* cout << "cosine: " << cosine << endl;
-        cout << "ks: " << ks << endl;
-        cout << "n: " << n << endl;
-        cout << "ks * pow(cosine,n): " << ks * pow(cosine,n) << endl;
-        */
+        
+        /* cout << "cosine: " << cosine << endl;
+         cout << "ks: " << ks << endl;
+         cout << "n: " << n << endl;
+         cout << "ks * pow(cosine,n): " << ks * pow(cosine,n) << endl;
+         */
         double ps;
         if(cosine<0)ps = 0;
         else ps = 255 * Ils * ks * pow(cosine,n);
-       // double ks = 0.25;
-       // double n = 10;
+        // double ks = 0.25;
+        // double n = 10;
         
         
-      //  cout << "ps: " << ps << endl;
+        //  cout << "ps: " << ps << endl;
         return ps;
-
+        
     }
     void DesiredColors()
     {
-=======
-    
-    double findXMin(Window window)
-    {
-        if(window.tl.x <= window.br.x) return window.tl.x;
-        else return window.br.x;
-    }
-    
-    double findXMax(Window window)
-    {
-        if(window.tl.x >= window.br.x) return window.tl.x;
-        else return window.br.x;
-    }
-    
-    double findYMin(Window window)
-    {
-        if(window.tl.y <= window.br.y) return window.tl.y;
-        else return window.br.y;
-    }
-    
-    double findYMax(Window window)
-    {
-        if(window.tl.y >= window.br.y) return window.tl.y;
-        else return window.br.y;
-    }
-
-    void setWindowCorners(vector<Coordinates>wC)
-    {
-        windowCorners = wC;
-    }
-    
-    double AmbientLight(double k, double I)
-    {
-        return k * I;
-    }
-    
-    void DesiredColors(double I, int r, int g, int b)
-    {
-        r = r * I;
-        g = g * I;
-        b = b * I;
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
     }
     
     void setCOP( Coordinates coP)
     {
         dn = coP.z;
     }
-<<<<<<< HEAD
-=======
-    vector<Coordinates> getWindowCorners()
-    {
-        return windowCorners;
-    }
-
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
-
+    
     vector<Coordinates> getColoredPoints(Coordinates coP)
     {
-               
+        
         for(int i = window.tl.y;i>= window.br.y; i--)
         {
             for(int j = window.tl.x;j<=window.br.x;j++)
@@ -615,7 +522,7 @@ public:
                 window.pixels.push_back(currentWindow);
             }
         }
-
+        
         window = displayWindow(window, coP.z);
         
         return window.pixels;
@@ -635,7 +542,6 @@ public:
     {
         return window;
     }
-<<<<<<< HEAD
     
     void setLightSource(Coordinates ls)
     {
@@ -655,8 +561,6 @@ public:
     {
         return b;
     }
-=======
->>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
 };
 
 #endif /* LightingUtils_h */
