@@ -19,6 +19,7 @@ private:
     vector<vector<Coordinates>>polygons;
     vector<SphereCoordinates> spheres;
     double radius;
+<<<<<<< HEAD
     double xL, yL;
     double dn;
     Coordinates vrP;
@@ -26,6 +27,14 @@ private:
     Coordinates LightSource;
     int r,g,b;
     
+=======
+    double xMin, xMax, yMin, yMax, xL, yL;
+    double dn;
+    Coordinates vrP;
+    vector<Coordinates> windowCorners;
+    Window window;
+
+>>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
 public:
     struct NVector{
         double A, B, C,D;
@@ -192,13 +201,17 @@ public:
                 else min = t2;
                 
                 double x,y,z;
+<<<<<<< HEAD
                 //cout << "current window: " << currentWindow.x << " " << currentWindow.y << " " << currentWindow.z << endl;
                 //cout << "sphere t: " << min << endl;
+=======
+>>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
                 x = coP.x + min * (currentWindow.x - coP.x);
                 y = coP.y + min * (currentWindow.y - coP.y);
                 z = coP.z + min * (currentWindow.z - coP.z);
                 //cout << "x : " << x << " y: " << y << " z: " << z << endl;
                 Coordinates newPoint = AssignPointsAndColor(AssignCoordinates3d(x, y, z), sphere.center.color);
+<<<<<<< HEAD
                 double pa,pd,ps;
                 pa = AmbientLight(sphere.lighting.ka, 1);
                 Coordinates nVector = subtractVectors(newPoint, sphere.center);
@@ -209,11 +222,17 @@ public:
                 newPoint.color.b = newPoint.color.b * (pa + pd) + ps;
                 //cout << "newPoint : " << newPoint.color.r << " " << newPoint.color.g << " " << newPoint.color.b << endl;
 
+=======
+>>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
                 return newPoint;
 
             }
         }
+<<<<<<< HEAD
         //cout << "int max: " << INT_MAX << endl;
+=======
+        
+>>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
         return AssignPointsAndColor(AssignCoordinates3d(INT_MAX, INT_MAX, INT_MAX), AssignPixels(0, 0, 0));
         
 
@@ -235,6 +254,7 @@ public:
             x = coP.x + t * (currentWindow.x - coP.x);
             y = coP.y + t * (currentWindow.y - coP.y);
             z = coP.z + t * (currentWindow.z - coP.z);
+<<<<<<< HEAD
             
             Coordinates newPoint = AssignPointsAndColor(AssignCoordinates3d(x, y, z), vertices[0].color);
 
@@ -249,6 +269,12 @@ public:
                 newPoint.color.b = newPoint.color.b * (pa + pd) + ps;
 
                 //cout << "newPoint : " << newPoint.color.r << " " << newPoint.color.g << " " << newPoint.color.b << endl;
+=======
+            Coordinates newPoint = AssignPointsAndColor(AssignCoordinates3d(x, y, z), vertices[0].color);
+            
+            if(CheckOnSurface(vertices, newPoint, plane)) {
+
+>>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
                 return newPoint;
 
             }
@@ -263,8 +289,12 @@ public:
         vector<Coordinates>sphereIntersections;
         vector<Coordinates>polygonIntersections;
 
+<<<<<<< HEAD
         //cout << "current window in Ray tracing: " << currentWindow.x << " " << currentWindow.y << " " << currentWindow.z << endl;
 
+=======
+        
+>>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
         for(int i = 0; i<spheres.size(); i++)
         {
             intersections.push_back(SphereIntersection(spheres[i], coP, currentWindow, spheres[i].r));
@@ -282,7 +312,10 @@ public:
         double min = sqrt(pow(intersections[0].x - coP.x,2.0)+ pow(intersections[0].y - coP.y,2.0) + pow(intersections[0].z - coP.z,2.0));
             
         tempIntersections = intersections[0];
+<<<<<<< HEAD
             tempIntersections.color = intersections[0].color;
+=======
+>>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
         for(int i = 1;i<intersections.size();i++)
         {
             double d = sqrt(pow(intersections[i].x - coP.x,2.0)+ pow(intersections[i].y - coP.y,2.0) + pow(intersections[i].z - coP.z,2.0));
@@ -299,7 +332,11 @@ public:
         }
         else
         {
+<<<<<<< HEAD
             return AssignPointsAndColor(currentWindow, AssignPixels(0, 0, 0));
+=======
+            return AssignPointsAndColor(AssignCoordinates3d(-1,-1,-1), AssignPixels(0, 0, 0));
+>>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
         }
     }
     
@@ -319,6 +356,11 @@ public:
         
         dimensions.tl = AssignCoordinates3d(0, max(window.tl.y, window.br.y), 0);
         dimensions.br = AssignCoordinates3d(max(window.tl.x, window.br.x), 0, 0);
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
         dimensions.pixels = window.pixels;
         
         for (int i = 0; i < dimensions.pixels.size(); i++) {
@@ -416,6 +458,7 @@ public:
         window.br.z -= viewPlane;
     }
     
+<<<<<<< HEAD
     double AmbientLight(double ka, double I)
     {
         return ka * 1;
@@ -502,12 +545,62 @@ public:
     }
     void DesiredColors()
     {
+=======
+    
+    double findXMin(Window window)
+    {
+        if(window.tl.x <= window.br.x) return window.tl.x;
+        else return window.br.x;
+    }
+    
+    double findXMax(Window window)
+    {
+        if(window.tl.x >= window.br.x) return window.tl.x;
+        else return window.br.x;
+    }
+    
+    double findYMin(Window window)
+    {
+        if(window.tl.y <= window.br.y) return window.tl.y;
+        else return window.br.y;
+    }
+    
+    double findYMax(Window window)
+    {
+        if(window.tl.y >= window.br.y) return window.tl.y;
+        else return window.br.y;
+    }
+
+    void setWindowCorners(vector<Coordinates>wC)
+    {
+        windowCorners = wC;
+    }
+    
+    double AmbientLight(double k, double I)
+    {
+        return k * I;
+    }
+    
+    void DesiredColors(double I, int r, int g, int b)
+    {
+        r = r * I;
+        g = g * I;
+        b = b * I;
+>>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
     }
     
     void setCOP( Coordinates coP)
     {
         dn = coP.z;
     }
+<<<<<<< HEAD
+=======
+    vector<Coordinates> getWindowCorners()
+    {
+        return windowCorners;
+    }
+
+>>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
 
     vector<Coordinates> getColoredPoints(Coordinates coP)
     {
@@ -542,6 +635,7 @@ public:
     {
         return window;
     }
+<<<<<<< HEAD
     
     void setLightSource(Coordinates ls)
     {
@@ -561,6 +655,8 @@ public:
     {
         return b;
     }
+=======
+>>>>>>> d279abd88ee4c729e2cb796c73535e004a5c8d40
 };
 
 #endif /* LightingUtils_h */
