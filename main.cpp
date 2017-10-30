@@ -103,9 +103,9 @@ void testingLighting(){
     
     info.setWindow(w);
     info.setCOP(coP);
-    info.testAlignment3dA( lightSource, beta, alpha, coP.z);
+    info.testAlignment3dA(beta, alpha, coP.z);
     
-    info.ScaleEnvironment(sf, lightSource);
+    info.ScaleEnvironment(sf);
     
     vector<Coordinates> pixels = info.getColoredPoints(coP);
     Image image;
@@ -113,7 +113,7 @@ void testingLighting(){
     image.uniformColor(245, 245, 245);
     image.DrawEnvironment(pixels);
 
-    image.writePPM("environment.jpg");
+    image.writePPM("environment.ppm");
     cout << "Finished"<< endl;
     
    /*

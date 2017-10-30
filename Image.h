@@ -90,6 +90,7 @@ public:
                     pixels[i].b = vertexPoints[i].color.b;
                     pixels[i].g = vertexPoints[i].color.g;
                     
+                    //cout << "pixels: " << pixels[i].r << " " << pixels[i].g  << " " << pixels[i].b << endl;
                 }
 
         }

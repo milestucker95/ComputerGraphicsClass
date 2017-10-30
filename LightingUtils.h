@@ -202,8 +202,8 @@ public:
                 double pa,pd,ps;
                 pa = AmbientLight(sphere.lighting.ka, 1);
                 Coordinates nVector = subtractVectors(newPoint, sphere.center);
-                pd = DiffuseReflection(nVector.x, nVector.y, nVector.z, sphere.lighting.kd, currentWindow,newPoint, coP);
-                ps = specularReflection(nVector.x, nVector.y, nVector.z, sphere.lighting.ks, sphere.lighting.n, currentWindow, newPoint, coP);
+                pd = DiffuseReflection(nVector.x, nVector.y, nVector.z, sphere.lighting.kd, currentWindow,newPoint, coP,false);
+                ps = specularReflection(nVector.x, nVector.y, nVector.z, sphere.lighting.ks, sphere.lighting.n, currentWindow, newPoint, coP,false);
                 newPoint.color.r = newPoint.color.r * (pa + pd) + ps;
                 newPoint.color.g = newPoint.color.g * (pa + pd) + ps;
                 newPoint.color.b = newPoint.color.b * (pa + pd) + ps;
@@ -242,13 +242,13 @@ public:
                 
                 double pa,pd,ps;
                 pa = AmbientLight(vertices[0].lighting.ka, 1);
-                pd = DiffuseReflection(nVector.A, nVector.B, nVector.C, vertices[0].lighting.kd, currentWindow,newPoint, coP);
-                ps = specularReflection(nVector.A, nVector.B, nVector.C, vertices[0].lighting.ks, vertices[0].lighting.n, currentWindow, newPoint, coP);
+                pd = DiffuseReflection(nVector.A, nVector.B, nVector.C, vertices[0].lighting.kd, currentWindow,newPoint, coP, true);
+                ps = specularReflection(nVector.A, nVector.B, nVector.C, vertices[0].lighting.ks, vertices[0].lighting.n, currentWindow, newPoint, coP, true);
                 newPoint.color.r = newPoint.color.r * (pa + pd) + ps;
                 newPoint.color.g = newPoint.color.g * (pa + pd) + ps;
                 newPoint.color.b = newPoint.color.b * (pa + pd) + ps;
                 
-                //cout << "newPoint : " << newPoint.color.r << " " << newPoint.color.g << " " << newPoint.color.b << endl;
+                //cout << "newPoint color: " << newPoint.color.r << " " << newPoint.color.g << " " << newPoint.color.b << endl;
                 return newPoint;
                 
             }
@@ -332,7 +332,7 @@ public:
         return dimensions;
     }
     
-    void ScaleEnvironment(double sf, Coordinates lightSource)
+    void ScaleEnvironment(double sf)
     {
         
         for(int i =0;i<polygons.size();i++)
@@ -365,9 +365,9 @@ public:
         
         
         
-        lightSource.x = lightSource.x * sf;
-        lightSource.y = lightSource.y * sf;
-        lightSource.z = lightSource.z * sf;
+        LightSource.x = LightSource.x * sf;
+        LightSource.y = LightSource.y * sf;
+        LightSource.z = LightSource.z * sf;
         
     }
     
@@ -381,7 +381,7 @@ public:
         return window;
     }
     
-    void testAlignment3dA(Coordinates &lightSource, int beta, int alpha, double viewPlane)
+    void testAlignment3dA(int beta, int alpha, double viewPlane)
     {
         Transformations3d info;
         
@@ -410,7 +410,7 @@ public:
             
         }
         
-        lightSource = info.wireFrame3dAlignment(lightSource, vrP, third, dn);
+        LightSource = info.wireFrame3dAlignment(LightSource, vrP, third, dn);
         
         window.tl.z -= viewPlane;
         window.br.z -= viewPlane;
@@ -421,24 +421,23 @@ public:
         return ka * 1;
     }
     
-    double DiffuseReflection(double x, double y, double z, double kd,Coordinates currentWindow, Coordinates intersection, Coordinates coP)
+    double DiffuseReflection(double x, double y, double z, double kd,Coordinates currentWindow, Coordinates intersection, Coordinates coP, bool isPoly)
     {
         Coordinates normalVector = AssignCoordinates3d(x, y, z);
-        //Coordinates RayVector = AssignCoordinates3d(0, 0, 50);
         
         Coordinates RayVector = subtractVectors(currentWindow, coP);
         double dp = dotProduct(normalVector, RayVector);
-        //cout << "dp: " << dp << endl;
         Coordinates LightRay = subtractVectors(LightSource, intersection);
-        //Coordinates LightRay = AssignCoordinates3d(0, 50, 35);
         
         double pd;
         double Ils = 1;
         //double kd = 0.6;
-        if(dp>0)
+        if(isPoly)
         {
-            //cout << "yo" << endl;
-            normalVector = AssignCoordinates3d(-normalVector.x, -normalVector.y, -normalVector.z);
+            if(dp>0)
+            {
+                normalVector = negateVector(normalVector);
+            }
         }
         double dotProductNormalLightRay = dotProduct(normalVector, LightRay);
         if (dotProductNormalLightRay/(magnitudeOfVector(LightRay) * magnitudeOfVector(normalVector))>0)
@@ -449,32 +448,22 @@ public:
         return pd;
     }
     
-    double specularReflection(double x, double y, double z, double ks, double n, Coordinates currentWindow, Coordinates intersection, Coordinates coP)
+    double specularReflection(double x, double y, double z, double ks, double n, Coordinates currentWindow, Coordinates intersection, Coordinates coP, bool isPoly)
     {
         Coordinates normalVector = AssignCoordinates3d(x, y, z);
-        //cout << "n" << n << endl;
         Coordinates RayVector = subtractVectors(currentWindow, coP);
-        //Coordinates RayVector = AssignCoordinates3d(0, 0, -50);
         double dp = dotProduct(normalVector, RayVector);
-        //cout << "dp: " << dp << endl;
         Coordinates LightRay = subtractVectors(LightSource, intersection);
-        //Coordinates LightRay = AssignCoordinates3d(0, 50, 35);
         double pd;
         double Ils = 1;
-        //double kd = 0.6;
-        if(dp>0)
+        if(isPoly)
         {
-            //cout << "yo" << endl;
-            normalVector = negateVector(normalVector);
+            if(dp>0)
+            {
+                normalVector = negateVector(normalVector);
+            }
         }
-        /* double dotProductNormalLightRay = dotProduct(normalVector, LightRay);
-         if (dotProductNormalLightRay/(magnitudeOfVector(LightRay) * magnitudeOfVector(normalVector)))
-         pd = (Ils * kd ) *(dotProductNormalLightRay/(magnitudeOfVector(LightRay) * magnitudeOfVector(normalVector)));
-         else
-         pd = 0;
-         */
-        
-        //cout << "d: " <<  pd << endl;
+
         Coordinates normalVectorDividedByMagnitude = AssignCoordinates3d(normalVector.x/magnitudeOfVector(normalVector), normalVector.y/magnitudeOfVector(normalVector),normalVector.z/magnitudeOfVector(normalVector));
         
         Coordinates LightRayDividedByMagnitude = AssignCoordinates3d(LightRay.x/magnitudeOfVector(LightRay), LightRay.y/magnitudeOfVector(LightRay),LightRay.z/magnitudeOfVector(LightRay));
@@ -483,27 +472,15 @@ public:
         Coordinates negateRayVector = negateVector(RayVector);
         Coordinates negatedRayVectorDividedByMagnitude = AssignCoordinates3d(negateRayVector.x/magnitudeOfVector(negateRayVector),negateRayVector.y/magnitudeOfVector(negateRayVector),negateRayVector.z/magnitudeOfVector(negateRayVector));
         double cosine = dotProduct(subtractVectors(scaleVector( scaleVector(normalVectorDividedByMagnitude,2) , dotProduct(normalVectorDividedByMagnitude, LightRayDividedByMagnitude)), LightRayDividedByMagnitude), negatedRayVectorDividedByMagnitude);
-        
-        /* cout << "cosine: " << cosine << endl;
-         cout << "ks: " << ks << endl;
-         cout << "n: " << n << endl;
-         cout << "ks * pow(cosine,n): " << ks * pow(cosine,n) << endl;
-         */
+
         double ps;
-        if(cosine<0)ps = 0;
+        if(cosine<=0)ps = 0;
         else ps = 255 * Ils * ks * pow(cosine,n);
-        // double ks = 0.25;
-        // double n = 10;
-        
-        
-        //  cout << "ps: " << ps << endl;
+
         return ps;
         
     }
-    void DesiredColors()
-    {
-    }
-    
+
     void setCOP( Coordinates coP)
     {
         dn = coP.z;
@@ -547,20 +524,7 @@ public:
     {
         LightSource = ls;
     }
-    
-    int getRed()
-    {
-        return r;
-    }
-    
-    int getGreen()
-    {
-        return g;
-    }
-    int getBlue()
-    {
-        return b;
-    }
+
 };
 
 #endif /* LightingUtils_h */
