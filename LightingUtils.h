@@ -436,7 +436,7 @@ public:
         for(int i = 0; i<spheres.size(); i++)
         {
             Coordinates sphereIntersection = SphereShadowIntersection(spheres[i], coP, currentIntersection, spheres[i].r);
-            if(sphereIntersection.t>0 && sphereIntersection.t<=1 && (sphereIntersection.x != currentIntersection.x || sphereIntersection.y != currentIntersection.y ||sphereIntersection.z != currentIntersection.z))
+            if(sphereIntersection.t>0 && sphereIntersection.t<=1 && (sphereIntersection.x != currentIntersection.x && sphereIntersection.y != currentIntersection.y && sphereIntersection.z != currentIntersection.z))
             {
                 return true;
             }
@@ -445,7 +445,7 @@ public:
         for(int i = 0; i<polys.size(); i++)
         {
             Coordinates polygonIntersection = PolygonShadowIntersection(polys[i], coP, currentIntersection, currentWindow);
-            if(polygonIntersection.t>0 && polygonIntersection.t<=1 && (polygonIntersection.x != currentIntersection.x || polygonIntersection.y != currentIntersection.y ||polygonIntersection.z != currentIntersection.z))
+            if(polygonIntersection.t>0 && polygonIntersection.t<=1 && (polygonIntersection.x != currentIntersection.x && polygonIntersection.y != currentIntersection.y && polygonIntersection.z != currentIntersection.z))
             {
                 return true;
             }
