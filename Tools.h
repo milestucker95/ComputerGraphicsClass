@@ -19,16 +19,24 @@ struct Pixels{
 struct Lighting{
     double ka,kd,ks, n;
 };
+
+struct NVector{
+    double A,B,C,D;
+};
 struct Coordinates{
     double x, y, z;
     Pixels color;
+    double t;
     Lighting lighting;
+    NVector nVector;
+    bool isPoly;
+    
 };
 
 
 struct SphereCoordinates{
     Coordinates center;
-    double r;
+    double r,t;
     Lighting lighting;
     //  Coordinates*next;
     
@@ -37,7 +45,9 @@ struct SphereCoordinates{
 struct Polygon{
     vector<Coordinates> points;
     Pixels color;
-    //  Coordinates*next;
+    double t;
+    Lighting lighting;
+    NVector nVector;
     
 };
 
@@ -182,22 +192,22 @@ Coordinates AssignPointsAndColor(Coordinates point, Pixels color)
     return coordinates;
 }
 
-Coordinates AssignPointsAndColorAndLighting(Coordinates point, Pixels color, double ka,double kd, double ks, double n)
+Coordinates AssignPointsAndColorAndLighting(Coordinates point, Pixels color,Lighting lighting)
 {
     Coordinates coordinates;
     coordinates.x = point.x;
     coordinates.y = point.y;
     coordinates.z = point.z;
     coordinates.color = color;
-    coordinates.lighting.ka = ka;
-    coordinates.lighting.kd = kd;
-    coordinates.lighting.ks = ks;
-    coordinates.lighting.n = n;
+    coordinates.lighting.ka = lighting.ka;
+    coordinates.lighting.kd = lighting.kd;
+    coordinates.lighting.ks = lighting.ks;
+    coordinates.lighting.n = lighting.n;
     
     
     return coordinates;
 }
-SphereCoordinates AssignSphereWithLighting(Coordinates point, double r, Pixels color, double ka,double kd, double ks, double n )
+SphereCoordinates AssignSphereWithLighting(Coordinates point, double r, Pixels color, Lighting lighting )
 {
     SphereCoordinates s;
     s.center.x = point.x;
@@ -205,10 +215,10 @@ SphereCoordinates AssignSphereWithLighting(Coordinates point, double r, Pixels c
     s.center.z = point.z;
     s.r = r;
     s.center.color = color;
-    s.lighting.ka = ka;
-    s.lighting.kd = kd;
-    s.lighting.ks = ks;
-    s.lighting.n = n;
+    s.lighting.ka = lighting.ka;
+    s.lighting.kd = lighting.kd;
+    s.lighting.ks = lighting.ks;
+    s.lighting.n = lighting.n;
     
     return s;
 }
@@ -223,6 +233,18 @@ SphereCoordinates AssignSphere(Coordinates point, double r, Pixels color )
     s.center.color = color;
     
     return s;
+}
+
+Lighting AssignLighting(double ka, double kd, double ks, double n)
+{
+    Lighting light;
+    
+    light.ka = ka;
+    light.kd = kd;
+    light.ks = ks;
+    light.n = n;
+    
+    return light;
 }
 
 Window ViewWindow(Coordinates tl, Coordinates br) {
