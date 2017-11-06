@@ -196,7 +196,6 @@ public:
                 x = coP.x + min * (currentWindow.x - coP.x);
                 y = coP.y + min * (currentWindow.y - coP.y);
                 z = coP.z + min * (currentWindow.z - coP.z);
-                //cout << "x : " << x << " y: " << y << " z: " << z << endl;
                 Coordinates newPoint = AssignPointsAndColorAndLighting(AssignCoordinates3d(x, y, z), sphere.center.color, sphere.lighting);
                 newPoint.isPoly = false;
                 Coordinates nVector = subtractVectors(newPoint, sphere.center);
@@ -204,33 +203,18 @@ public:
                 newPoint.nVector.B = nVector.y;
                 newPoint.nVector.C = nVector.z;
 
-//                double pa,pd,ps;
-                //Change color based on light source for intersection points
-//
-//                pa = AmbientLight(sphere.lighting.ka, 1);
-//                Coordinates nVector = subtractVectors(newPoint, sphere.center);
-//                pd = DiffuseReflection(nVector.x, nVector.y, nVector.z, sphere.lighting.kd, currentWindow,newPoint, coP,false);
-//                ps = specularReflection(nVector.x, nVector.y, nVector.z, sphere.lighting.ks, sphere.lighting.n, currentWindow, newPoint, coP,false);
-               // cout << "sphere pa pd ps: " << pa << "   " << pd << "   " << ps << endl;
-//                newPoint.color.r = newPoint.color.r * (pa + pd) + ps;
-//                newPoint.color.g = newPoint.color.g * (pa + pd) + ps;
-//                newPoint.color.b = newPoint.color.b * (pa + pd) + ps;
-                //cout << "newPoint : " << newPoint.color.r << " " << newPoint.color.g << " " << newPoint.color.b << endl;
-               // cout << "new Point sphere: " << newPoint.x << " " << newPoint.y << " " << newPoint.z << endl;
                 return newPoint;
                 
             }
         }
-        //cout << "int max: " << INT_MAX << endl;
         return AssignPointsAndColor(AssignCoordinates3d(INT_MAX, INT_MAX, INT_MAX), AssignPixels(0, 0, 0));
         
         
     }
     
-    Coordinates SphereShadowIntersection(SphereCoordinates sphere, Coordinates coP, Coordinates i, int r)
+    Coordinates SphereShadowIntersection(SphereCoordinates sphere, Coordinates i, int r)
     {
        vector<Coordinates>sphereIntersections;
-        //Coordinates i = AssignCoordinates3d(50, 50, 40);
 
         double A, B,C;
         A = pow((LightSource.x - i.x),2.0) + pow((LightSource.y - i.y),2.0) + pow((LightSource.z - i.z),2.0);
@@ -240,9 +224,6 @@ public:
         
         double t1 = (-B + sqrt( pow(B,2.0) - (4.0 * A * C)))/(2.0*A);
         double t2 = (-B - sqrt( pow(B,2.0) - (4.0 * A * C)))/(2.0*A);
-        //cout << "checking for sphere shadow" << endl;
-        //test intersection
-       
        
         if((pow(B,2.0) - (4 * A * C)>=0) && t1>=0 && t2>=0)
         {
@@ -252,7 +233,6 @@ public:
                 if(t1<=t2)min = t1;
                 else min = t2;
              
-               // cout << "sphere min: " << min << endl;
                 double x,y,z;
                 
                 x = i.x + min * (LightSource.x - i.x);
@@ -261,16 +241,6 @@ public:
                 
                 Coordinates newPoint = AssignPointsAndColor(AssignCoordinates3d(x, y, z), sphere.center.color);
                 newPoint.t = min;
-                double pa,pd,ps;
-                //Change color based on light source for intersection points
-                
-                //pa = AmbientLight(sphere.lighting.ka, 1);
-                //Coordinates nVector = subtractVectors(newPoint, sphere.center);
-                //pd = DiffuseReflection(nVector.x, nVector.y, nVector.z, sphere.lighting.kd, currentWindow,newPoint, coP,false);
-//                ps = specularReflection(nVector.x, nVector.y, nVector.z, sphere.lighting.ks, sphere.lighting.n, currentWindow, newPoint, coP,false);
-//                newPoint.color.r = newPoint.color.r * (pa + pd) + ps;
-//                newPoint.color.g = newPoint.color.g * (pa + pd) + ps;
-//                newPoint.color.b = newPoint.color.b * (pa + pd) + ps;
                 
                 return newPoint;
                 
@@ -284,7 +254,7 @@ public:
     }
     
     
-    Coordinates PolygonIntersection(vector<Coordinates> vertices, Coordinates coP, Coordinates currentWindow)
+    Coordinates PolygonIntersection(vector<Coordinates> vertices, Coordinates coP, Coordinates currentWindow, int i)
     {
         vector<Coordinates>polygonIntersections;
         //Get the normal vector
@@ -294,7 +264,6 @@ public:
         double denominator = (nVector.A*(currentWindow.x - coP.x) + nVector.B*(currentWindow.y - coP.y) + nVector.C*(currentWindow.z - coP.z));
         double t = -(((nVector.A * coP.x) + (nVector.B * coP.y) + (nVector.C * coP.z) + nVector.D)/denominator);
         double x,y,z;
-        Coordinates i = AssignCoordinates3d(50, 50, 40);
 
         if(denominator != 0 && t>=0)
         {
@@ -308,33 +277,18 @@ public:
             newPoint.nVector.C = nVector.C;
             newPoint.isPoly = true;
             
-            
-            
-            if(CheckOnSurface(vertices, newPoint, plane)) {
-                //Change color based on light source for intersection points
-//                double pa,pd,ps;
-//                pa = AmbientLight(vertices[0].lighting.ka, 1);
-//                pd = DiffuseReflection(nVector.A, nVector.B, nVector.C, vertices[0].lighting.kd, currentWindow,newPoint, coP, true);
-//                ps = specularReflection(nVector.A, nVector.B, nVector.C, vertices[0].lighting.ks, vertices[0].lighting.n, currentWindow, newPoint, coP, true);
-//                newPoint.color.r = newPoint.color.r * (pa + pd) + ps;
-//                newPoint.color.g = newPoint.color.g * (pa + pd) + ps;
-//                newPoint.color.b = newPoint.color.b * (pa + pd) + ps;
-               // cout << "new Point polygon: " << newPoint.x << " " << newPoint.y << " " << newPoint.z << endl;
-               // cout << "polygon pa pd ps: " << pa << "   " << pd << "   " << ps << endl;
-
-                //cout << "in poly algo: " << newPoint.nVector.A << endl;
+                if(CheckOnSurface(vertices, newPoint, plane)) {
+                    newPoint.shapeNumber = i;
                 return newPoint;
                 
             }
         }
-       // cout << "hello" << endl;
 
         return AssignPointsAndColor(AssignCoordinates3d(INT_MAX, INT_MAX, INT_MAX), AssignPixels(0, 0, 0));;
     }
     
-    Coordinates PolygonShadowIntersection(vector<Coordinates> vertices, Coordinates coP, Coordinates i, Coordinates currentWindow)
+    Coordinates PolygonShadowIntersection(vector<Coordinates> vertices, Coordinates i)
     {
-        vector<Coordinates>polygonIntersections;
         //Get the normal vector
         NVector nVector = PolygonPlaneAlgorithm(vertices);
         //Choosing what plane the object is on
@@ -342,10 +296,8 @@ public:
         double denominator = (nVector.A*(LightSource.x - i.x) + nVector.B*(LightSource.y - i.y) + nVector.C*(LightSource.z - i.z));
         double t = -(((nVector.A * i.x) + (nVector.B * i.y) + (nVector.C * i.z) + nVector.D)/denominator);
         double x,y,z;
-        //cout << "t: " << t << endl;
 
-
-        if(denominator != 0 && t>=0)
+        if(denominator != 0 && t>0)
         {
             x = i.x + t * (LightSource.x - i.x);
             y = i.y + t * (LightSource.y - i.y);
@@ -356,7 +308,6 @@ public:
             
             if(CheckOnSurface(vertices, newPoint, plane)) {
             
-                
                 return newPoint;
                 
             }
@@ -378,7 +329,7 @@ public:
         
         for(int i = 0; i<polys.size(); i++)
         {
-            Coordinates polygonIntersection = PolygonIntersection(polys[i], coP, currentWindow);
+            Coordinates polygonIntersection = PolygonIntersection(polys[i], coP, currentWindow, i);
             
             intersections.push_back(polygonIntersection);
                 
@@ -391,8 +342,6 @@ public:
             double min = sqrt(pow(intersections[0].x - coP.x,2.0)+ pow(intersections[0].y - coP.y,2.0) + pow(intersections[0].z - coP.z,2.0));
             
             tempIntersections = intersections[0];
-            tempIntersections.color = intersections[0].color;
-            //tempIntersections.lighting = intersections[0].lighting;
             for(int i = 1;i<intersections.size();i++)
             {
                 double d = sqrt(pow(intersections[i].x - coP.x,2.0)+ pow(intersections[i].y - coP.y,2.0) + pow(intersections[i].z - coP.z,2.0));
@@ -401,8 +350,6 @@ public:
                 {
                     min = d;
                     tempIntersections = intersections[i];
-                    
-                    tempIntersections.color = intersections[i].color;
                 }
             }
             
@@ -411,15 +358,17 @@ public:
                 return AssignPointsAndColor(currentWindow, AssignPixels(0, 0, 0));
             }
             double pa,pd,ps, Ils = 1, sh = 1;
-            if(ShadowRayTracingDistance(tempIntersections, polys, spheres, coP, currentWindow))
-            {sh = 0; Ils = 0.5;}
+            if(ShadowRayTracingDistance(tempIntersections, polys, spheres))
+            {
+                sh = 0; Ils = 0.5;
+            }
             pa = AmbientLight(tempIntersections.lighting.ka, 1);
             pd = DiffuseReflection(tempIntersections.nVector.A, tempIntersections.nVector.B, tempIntersections.nVector.C, tempIntersections.lighting.kd, currentWindow,tempIntersections, coP, tempIntersections.isPoly,Ils);
             ps = specularReflection(tempIntersections.nVector.A, tempIntersections.nVector.B, tempIntersections.nVector.C, tempIntersections.lighting.ks, tempIntersections.lighting.n, currentWindow, tempIntersections, coP, tempIntersections.isPoly, Ils);
 
-            tempIntersections.color.r = tempIntersections.color.r * (pa + pd) + (ps*sh);
-            tempIntersections.color.g = tempIntersections.color.g * (pa + pd) + (ps*sh);
-            tempIntersections.color.b = tempIntersections.color.b * (pa + pd) + (ps*sh);
+            tempIntersections.color.r = int(tempIntersections.color.r * (pa + pd) + (ps*sh));
+            tempIntersections.color.g = int(tempIntersections.color.g * (pa + pd) + (ps*sh));
+            tempIntersections.color.b = int(tempIntersections.color.b * (pa + pd) + (ps*sh));
 
             return tempIntersections;
             
@@ -430,13 +379,13 @@ public:
         }
     }
     
-    bool ShadowRayTracingDistance(Coordinates currentIntersection, vector<vector<Coordinates>>polys, vector<SphereCoordinates>spheres, Coordinates coP, Coordinates currentWindow)
+    bool ShadowRayTracingDistance(Coordinates currentIntersection, vector<vector<Coordinates>>polys, vector<SphereCoordinates>spheres)
     {
         
         for(int i = 0; i<spheres.size(); i++)
         {
-            Coordinates sphereIntersection = SphereShadowIntersection(spheres[i], coP, currentIntersection, spheres[i].r);
-            if(sphereIntersection.t>0 && sphereIntersection.t<=1 && (sphereIntersection.x != currentIntersection.x && sphereIntersection.y != currentIntersection.y && sphereIntersection.z != currentIntersection.z))
+            Coordinates sphereIntersection = SphereShadowIntersection(spheres[i], currentIntersection, spheres[i].r);
+            if(sphereIntersection.t>0 && sphereIntersection.t<=1 )
             {
                 return true;
             }
@@ -444,8 +393,8 @@ public:
        
         for(int i = 0; i<polys.size(); i++)
         {
-            Coordinates polygonIntersection = PolygonShadowIntersection(polys[i], coP, currentIntersection, currentWindow);
-            if(polygonIntersection.t>0 && polygonIntersection.t<=1 && (polygonIntersection.x != currentIntersection.x && polygonIntersection.y != currentIntersection.y && polygonIntersection.z != currentIntersection.z))
+            Coordinates polygonIntersection = PolygonShadowIntersection(polys[i], currentIntersection);
+            if(polygonIntersection.t>0 && polygonIntersection.t<=1 && currentIntersection.shapeNumber != i)
             {
                 return true;
             }
@@ -520,16 +469,6 @@ public:
         
     }
     
-    Window ChangeZWLocation(Window window, double zw)
-    {
-        
-        window.tl.z = zw;
-        window.br.z = zw;
-        
-        
-        return window;
-    }
-    
     void testAlignment3dA(int beta, int alpha, double viewPlane)
     {
         Transformations3d info;
@@ -563,6 +502,86 @@ public:
         
         window.tl.z -= viewPlane;
         window.br.z -= viewPlane;
+    }
+    
+    void TranslateObjects(Coordinates T)
+    {
+        double xT = T.x, yT = T.y, zT = T.z;
+        
+        
+        for(int i = 0;i<polygons.size();i++)
+        {
+            for(int j = 0;j <polygons[i].size();j++)
+            {
+                polygons[i][j].x += xT;
+                polygons[i][j].y += yT;
+                polygons[i][j].z += zT;
+                
+                cout << polygons[i][j].x << " " << polygons[i][j].y << " " << polygons[i][j].z << endl;
+
+            }
+        }
+        
+        for(int i =0;i<spheres.size();i++)
+        {
+            spheres[i].center.x += xT;
+            spheres[i].center.y += yT;
+            spheres[i].center.z += zT;
+            
+            cout << spheres[i].center.x << "  " << spheres[i].center.y << " " << spheres[i].center.z << endl;
+        }
+
+    }
+    
+    void ScaleObjects( Coordinates T, double sFactor)
+    {
+        
+        for(int i = 0 ;i<polygons.size();i++)
+        {
+            for(int j = 0;j <polygons[i].size();j++)
+            {
+                polygons[i][j].x -= T.x;
+                polygons[i][j].y -= T.y;
+                polygons[i][j].z -= T.z;
+            
+                polygons[i][j].x *= sFactor;
+                polygons[i][j].y *= sFactor;
+                polygons[i][j].z *= sFactor;
+                
+                polygons[i][j].x += T.x;
+                polygons[i][j].y += T.y;
+                polygons[i][j].z += T.z;
+                cout << polygons[i][j].x << " " << polygons[i][j].y << " " << polygons[i][j].z << endl;
+            }
+        }
+        
+        for(int i =0;i<spheres.size();i++)
+        {
+            spheres[i].center.x -= T.x;
+            spheres[i].center.y -= T.y;
+            spheres[i].center.z -= T.z;
+            
+            spheres[i].center.x *= sFactor;
+            spheres[i].center.y *= sFactor;
+            spheres[i].center.z *= sFactor;
+            spheres[i].r *= sFactor;
+
+            spheres[i].center.x += T.x;
+            spheres[i].center.y += T.y;
+            spheres[i].center.z += T.z;
+            cout << spheres[i].center.x << "  " << spheres[i].center.y << " " << spheres[i].center.z << endl;
+        }
+    }
+
+    void Rotate(Coordinates zAxis, double degrees)
+    {
+        double radians = Degrees_to_Radians(degrees);
+        double x0,y0,z0;
+        x0 = zAxis.x * cos(radians) - zAxis.y * sin(radians);
+        y0 = zAxis.y * cos(radians) + zAxis.x * sin(radians);
+        z0 = zAxis.z;
+        
+        cout << x0 << " " << y0 << " " << z0 << endl;
     }
     
     double AmbientLight(double ka, double I)
@@ -602,8 +621,7 @@ public:
         Coordinates RayVector = subtractVectors(currentWindow, coP);
         double dp = dotProduct(normalVector, RayVector);
         Coordinates LightRay = subtractVectors(LightSource, intersection);
-        double pd;
-       // double Ils = 1;
+        
         if(isPoly)
         {
             if(dp>0)
@@ -645,7 +663,6 @@ public:
             {
                 Coordinates currentWindow = AssignCoordinates3d(j,i, window.br.z);
                 currentWindow.color = RayTracingDistance(coP, currentWindow, polygons, spheres).color;
-                //currentWindow.color = ShadowRayTracingDistance(AssignCoordinates3d(0, 0, 0), polygons, spheres, coP, currentWindow).color;
                 
                 window.pixels.push_back(currentWindow);
             }
@@ -675,6 +692,9 @@ public:
     {
         LightSource = ls;
     }
+    
+    inline float Degrees_to_Radians(float angle){ //printf("this is the angle in radian: %f\n", (angle * 1.0 * M_PI)/(1.0 * 180));
+        return (angle * 1.0 * M_PI)/(1.0 * 180); }
 
 };
 

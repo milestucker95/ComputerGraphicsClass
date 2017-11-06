@@ -30,6 +30,8 @@ struct Coordinates{
     Lighting lighting;
     NVector nVector;
     bool isPoly;
+    bool onSurface;
+    int shapeNumber;
     
 };
 
