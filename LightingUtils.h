@@ -459,10 +459,10 @@ public:
         
         window.tl.x = window.tl.x * sf;
         window.tl.y = window.tl.y * sf;
-        //window.tl.z = window.tl.z * sf;
+        window.tl.z = window.tl.z * 1.5;
         window.br.x = window.br.x * sf;
         window.br.y = window.br.y * sf;
-       // window.br.z = window.br.z * sf;
+        window.br.z = window.br.z * 1.5;
         
         LightSource.x = LightSource.x * sf;
         LightSource.y = LightSource.y * sf;
@@ -535,15 +535,11 @@ public:
     
     void ScaleObjects( vector<int>polys, vector<int>sphs, Coordinates T, double sFactor)
     {
-        cout << sFactor << endl;
         for(int i = 0 ;i<polys.size();i++)
         {
-//            cout << "polys i: " << polys[i] << endl;
             int polyToChange = polys[i];
             for(int j = 0;j <polygons[polyToChange].size();j++)
             {
-               // cout << "j: " << j << endl;
-               // cout << polygons[polyToChange][j].x << " " << polygons[polyToChange][j].y << " " << polygons[polyToChange][j].z << endl;
 
                 polygons[polyToChange][j].x -= T.x;
                 polygons[polyToChange][j].y -= T.y;
@@ -556,7 +552,6 @@ public:
                 polygons[polyToChange][j].x += T.x;
                 polygons[polyToChange][j].y += T.y;
                 polygons[polyToChange][j].z += T.z;
-                //cout << polygons[polyToChange][j].x << " " << polygons[polyToChange][j].y << " " << polygons[polyToChange][j].z << endl;
             }
         }
         
@@ -616,15 +611,17 @@ public:
 
             for(int j = 0; j<polygons[polyToChange].size();j++)
             {
+
                 polygons[polyToChange][j].x -= xT;
                 polygons[polyToChange][j].y -= yT;
                 polygons[polyToChange][j].z -= zT;
+                
                 polygons[polyToChange][j] = RotateAboutYAxis(polygons[polyToChange][j], -beta);
                 polygons[polyToChange][j] = RotateAboutXAxis(polygons[polyToChange][j], alpha);
                 polygons[polyToChange][j] = RotateAboutZAxis(polygons[polyToChange][j], degreesToRadians);
                 polygons[polyToChange][j] = RotateAboutXAxis(polygons[polyToChange][j], -alpha);
                 polygons[polyToChange][j] = RotateAboutYAxis(polygons[polyToChange][j], beta);
-                
+
                 polygons[polyToChange][j].x += xT;
                 polygons[polyToChange][j].y += yT;
                 polygons[polyToChange][j].z += zT;
@@ -641,9 +638,7 @@ public:
         y0 = points.y * cos(radians) - points.z * sin(radians);
         z0 = points.z * cos(radians) + points.y * sin(radians);
         
-//        cout << x0 << " " << y0 << " " << z0 << endl;
-
-        return AssignPointsAndColor(AssignCoordinates3d(x0, y0, z0), points.color);
+        return AssignPointsAndColorAndLighting(AssignCoordinates3d(x0,y0,z0),points.color, points.lighting);
     }
     
     Coordinates RotateAboutYAxis(Coordinates points, double radians)
@@ -654,9 +649,7 @@ public:
         y0 = points.y;
         z0 = points.z * cos(radians) - points.x * sin(radians);
         
-//        cout << x0 << " " << y0 << " " << z0 << endl;
-
-        return AssignPointsAndColor(AssignCoordinates3d(x0, y0, z0), points.color);
+        return AssignPointsAndColorAndLighting(AssignCoordinates3d(x0,y0,z0),points.color, points.lighting);
 
     }
     
@@ -667,9 +660,7 @@ public:
         y0 = points.y * cos(radians) + points.x * sin(radians);
         z0 = points.z;
         
-//        cout << x0 << " " << y0 << " " << z0 << endl;
-
-        return AssignPointsAndColor(AssignCoordinates3d(x0, y0, z0), points.color);
+        return AssignPointsAndColorAndLighting(AssignCoordinates3d(x0,y0,z0),points.color, points.lighting);
     }
     
     Coordinates RotateUVector(Coordinates p1, Coordinates p2)

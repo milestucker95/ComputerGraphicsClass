@@ -113,7 +113,7 @@ void lightingAlgorithm4(){
     image.uniformColor(245, 245, 245);
     image.DrawEnvironment(pixels);
 
-    image.writePPM("environment.jpg");
+    image.writePPM("environment.ppm");
     cout << "Finished"<< endl;
 }
 
@@ -217,7 +217,7 @@ void threeDTransformations1(){
     image.uniformColor(245, 245, 245);
     image.DrawEnvironment(pixels);
     
-    image.writePPM("3dTransProblem1.jpg");
+    image.writePPM("3dTransProblem1.ppm");
     cout << "Finished"<< endl;
 }
 
@@ -323,7 +323,7 @@ void threeDTransformations2(){
         image.uniformColor(245, 245, 245);
         image.DrawEnvironment(pixels);
     
-    image.writePPM("3dTransformations2.jpg");
+    image.writePPM("3dTransformations2.ppm");
     cout << "Finished"<< endl;
 }
 
@@ -397,6 +397,7 @@ void threeDTransformations3(){
 
     LightingUtils info(polygon, sphere);
     Coordinates TCoordinate = AssignCoordinates3d(0, 30, 0);
+
     Coordinates lightSource = AssignCoordinates3d(200, 200, 50);
     Coordinates vrP = AssignCoordinates3d(120, 50, 120);
     info.setVRP(vrP);
@@ -431,7 +432,7 @@ void threeDTransformations3(){
     image.uniformColor(245, 245, 245);
     image.DrawEnvironment(pixels);
     
-    image.writePPM("3dtransproblem3.jpg");
+    image.writePPM("3dtransproblem3.ppm");
     cout << "Finished"<< endl;
 }
 
@@ -1219,8 +1220,6 @@ int main(int argc, const char * argv[]) {
     threeDTransformations2();
     threeDTransformations3();
 
-
-    //lightingAlgorithm4();
        return 0;
     
 }
