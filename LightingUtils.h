@@ -417,9 +417,10 @@ public:
         window.tl.y-=yL;
         window.br.y-=yL;
         
-        dimensions.tl = AssignCoordinates3d(0, max(window.tl.y, window.br.y), 0);
-        dimensions.br = AssignCoordinates3d(max(window.tl.x, window.br.x), 0, 0);
-        dimensions.pixels = window.pixels;
+//        dimensions.tl = AssignCoordinates3d(0, max(window.tl.y, window.br.y), 0);
+//        dimensions.br = AssignCoordinates3d(max(window.tl.x, window.br.x), 0, 0);
+//        dimensions.pixels = window.pixels;
+        dimensions = window;
         
         for (int i = 0; i < dimensions.pixels.size(); i++) {
             Coordinates cur_coord = dimensions.pixels[i];
@@ -458,10 +459,10 @@ public:
         
         window.tl.x = window.tl.x * sf;
         window.tl.y = window.tl.y * sf;
-        window.tl.z = window.tl.z * sf;
+        //window.tl.z = window.tl.z * sf;
         window.br.x = window.br.x * sf;
         window.br.y = window.br.y * sf;
-        window.br.z = window.br.z * sf;
+       // window.br.z = window.br.z * sf;
         
         LightSource.x = LightSource.x * sf;
         LightSource.y = LightSource.y * sf;
@@ -473,14 +474,10 @@ public:
     {
         Transformations3d info;
         
-        
-        
         vector<Transformations3d::UVN> first = info.initializeUVNPoints();
         vector<Transformations3d::UVN> second = info.tiltUVNPoints(first, beta);
         
         vector<Transformations3d::UVN> third = info.rotateUVNPoints(second, alpha);
-        
-        vector<Transformations3d::UVN> testUVN;
         
         
         for(int i =0;i<polygons.size();i++)
@@ -504,84 +501,180 @@ public:
         window.br.z -= viewPlane;
     }
     
-    void TranslateObjects(Coordinates T)
+    void TranslateObjects(Coordinates T, vector<int>sphs, vector<int> poly)
     {
         double xT = T.x, yT = T.y, zT = T.z;
         
         
-        for(int i = 0;i<polygons.size();i++)
+        for(int i = 0;i<poly.size();i++)
         {
-            for(int j = 0;j <polygons[i].size();j++)
+            int polyToChange = poly[i];
+            for(int j = 0;j <polygons[polyToChange].size();j++)
             {
-                polygons[i][j].x += xT;
-                polygons[i][j].y += yT;
-                polygons[i][j].z += zT;
-                
-                cout << polygons[i][j].x << " " << polygons[i][j].y << " " << polygons[i][j].z << endl;
+//               cout << polygons[polyToChange][j].x << " " << polygons[polyToChange][j].y << " " << polygons[polyToChange][j].z << endl;
+//                cout << "polygon to change: " << polyToChange << endl;
+//                cout << "j: " << j << endl;
+                polygons[polyToChange][j].x += xT;
+                polygons[polyToChange][j].y += yT;
+                polygons[polyToChange][j].z += zT;
+//                cout << polygons[polyToChange][j].x << " " << polygons[polyToChange][j].y << " " << polygons[polyToChange][j].z << endl;
 
             }
         }
         
-        for(int i =0;i<spheres.size();i++)
+        for(int i =0;i<sphs.size();i++)
         {
-            spheres[i].center.x += xT;
-            spheres[i].center.y += yT;
-            spheres[i].center.z += zT;
-            
-            cout << spheres[i].center.x << "  " << spheres[i].center.y << " " << spheres[i].center.z << endl;
+            int sphChange= sphs[i];
+
+            spheres[sphChange].center.x += xT;
+            spheres[sphChange].center.y += yT;
+            spheres[sphChange].center.z += zT;
         }
 
     }
     
-    void ScaleObjects( Coordinates T, double sFactor)
+    void ScaleObjects( vector<int>polys, vector<int>sphs, Coordinates T, double sFactor)
     {
-        
-        for(int i = 0 ;i<polygons.size();i++)
+        cout << sFactor << endl;
+        for(int i = 0 ;i<polys.size();i++)
         {
-            for(int j = 0;j <polygons[i].size();j++)
+//            cout << "polys i: " << polys[i] << endl;
+            int polyToChange = polys[i];
+            for(int j = 0;j <polygons[polyToChange].size();j++)
             {
-                polygons[i][j].x -= T.x;
-                polygons[i][j].y -= T.y;
-                polygons[i][j].z -= T.z;
+               // cout << "j: " << j << endl;
+               // cout << polygons[polyToChange][j].x << " " << polygons[polyToChange][j].y << " " << polygons[polyToChange][j].z << endl;
+
+                polygons[polyToChange][j].x -= T.x;
+                polygons[polyToChange][j].y -= T.y;
+                polygons[polyToChange][j].z -= T.z;
             
-                polygons[i][j].x *= sFactor;
-                polygons[i][j].y *= sFactor;
-                polygons[i][j].z *= sFactor;
+                polygons[polyToChange][j].x *= sFactor;
+                polygons[polyToChange][j].y *= sFactor;
+                polygons[polyToChange][j].z *= sFactor;
                 
-                polygons[i][j].x += T.x;
-                polygons[i][j].y += T.y;
-                polygons[i][j].z += T.z;
-                cout << polygons[i][j].x << " " << polygons[i][j].y << " " << polygons[i][j].z << endl;
+                polygons[polyToChange][j].x += T.x;
+                polygons[polyToChange][j].y += T.y;
+                polygons[polyToChange][j].z += T.z;
+                //cout << polygons[polyToChange][j].x << " " << polygons[polyToChange][j].y << " " << polygons[polyToChange][j].z << endl;
             }
         }
         
-        for(int i =0;i<spheres.size();i++)
+        for(int i =0;i<sphs.size();i++)
         {
-            spheres[i].center.x -= T.x;
-            spheres[i].center.y -= T.y;
-            spheres[i].center.z -= T.z;
+            int sphereToChange = sphs[i];
+            spheres[sphereToChange].center.x -= T.x;
+            spheres[sphereToChange].center.y -= T.y;
+            spheres[sphereToChange].center.z -= T.z;
             
-            spheres[i].center.x *= sFactor;
-            spheres[i].center.y *= sFactor;
-            spheres[i].center.z *= sFactor;
-            spheres[i].r *= sFactor;
+            spheres[sphereToChange].center.x *= sFactor;
+            spheres[sphereToChange].center.y *= sFactor;
+            spheres[sphereToChange].center.z *= sFactor;
+            spheres[sphereToChange].r *= sFactor;
 
-            spheres[i].center.x += T.x;
-            spheres[i].center.y += T.y;
-            spheres[i].center.z += T.z;
-            cout << spheres[i].center.x << "  " << spheres[i].center.y << " " << spheres[i].center.z << endl;
+            spheres[sphereToChange].center.x += T.x;
+            spheres[sphereToChange].center.y += T.y;
+            spheres[sphereToChange].center.z += T.z;
         }
     }
 
-    void Rotate(Coordinates zAxis, double degrees)
+    void Rotate(vector<int>sphs,vector<int>polys, double degrees, Coordinates p1, Coordinates p2)
     {
-        double radians = Degrees_to_Radians(degrees);
-        double x0,y0,z0;
-        x0 = zAxis.x * cos(radians) - zAxis.y * sin(radians);
-        y0 = zAxis.y * cos(radians) + zAxis.x * sin(radians);
-        z0 = zAxis.z;
+        double degreesToRadians = Degrees_to_Radians(degrees);
+        Coordinates UVector = RotateUVector(p1, p2);
+        double a = sqrt(pow(UVector.x,2) + pow(UVector.z,2));
+        double beta = acos(UVector.z/a);
+        double betaRadians = Degrees_to_Radians(beta);
+        double U = sqrt(pow(UVector.x,2) + pow(UVector.y,2) + pow(UVector.z,2));
+        double alpha = acos(a/U);
+        double alphaRadians = Degrees_to_Radians(alpha);
+        double xT,yT,zT;
         
-        cout << x0 << " " << y0 << " " << z0 << endl;
+        //Translate center
+        xT = p1.x;
+        yT = p1.y;
+        zT = p1.z;
+        for(int i =0; i<sphs.size();i++)
+        {
+
+            spheres[sphs[i]].center.x-=xT;
+            spheres[sphs[i]].center.y-=yT;
+            spheres[sphs[i]].center.z-=zT;
+            spheres[sphs[i]].center = RotateAboutYAxis(spheres[sphs[i]].center, -beta);
+            spheres[sphs[i]].center = RotateAboutXAxis(spheres[sphs[i]].center, alpha);
+            spheres[sphs[i]].center = RotateAboutZAxis(spheres[sphs[i]].center, degreesToRadians);
+            spheres[sphs[i]].center = RotateAboutXAxis(spheres[sphs[i]].center, -alpha);
+            spheres[sphs[i]].center = RotateAboutYAxis(spheres[sphs[i]].center, beta);
+            spheres[sphs[i]].center.x+=xT;
+            spheres[sphs[i]].center.y+=yT;
+            spheres[sphs[i]].center.z+=zT;
+        }
+    
+        for(int i =0; i<polys.size();i++)
+        {
+            int polyToChange = polys[i];
+
+            for(int j = 0; j<polygons[polyToChange].size();j++)
+            {
+                polygons[polyToChange][j].x -= xT;
+                polygons[polyToChange][j].y -= yT;
+                polygons[polyToChange][j].z -= zT;
+                polygons[polyToChange][j] = RotateAboutYAxis(polygons[polyToChange][j], -beta);
+                polygons[polyToChange][j] = RotateAboutXAxis(polygons[polyToChange][j], alpha);
+                polygons[polyToChange][j] = RotateAboutZAxis(polygons[polyToChange][j], degreesToRadians);
+                polygons[polyToChange][j] = RotateAboutXAxis(polygons[polyToChange][j], -alpha);
+                polygons[polyToChange][j] = RotateAboutYAxis(polygons[polyToChange][j], beta);
+                
+                polygons[polyToChange][j].x += xT;
+                polygons[polyToChange][j].y += yT;
+                polygons[polyToChange][j].z += zT;
+
+            }
+            
+        }
+    }
+    
+    Coordinates RotateAboutXAxis(Coordinates points, double radians)
+    {
+        double x0,y0,z0;
+        x0 = points.x;
+        y0 = points.y * cos(radians) - points.z * sin(radians);
+        z0 = points.z * cos(radians) + points.y * sin(radians);
+        
+//        cout << x0 << " " << y0 << " " << z0 << endl;
+
+        return AssignPointsAndColor(AssignCoordinates3d(x0, y0, z0), points.color);
+    }
+    
+    Coordinates RotateAboutYAxis(Coordinates points, double radians)
+    {
+        
+        double x0,y0,z0;
+        x0 = points.x * cos(radians) + points.z * sin(radians);
+        y0 = points.y;
+        z0 = points.z * cos(radians) - points.x * sin(radians);
+        
+//        cout << x0 << " " << y0 << " " << z0 << endl;
+
+        return AssignPointsAndColor(AssignCoordinates3d(x0, y0, z0), points.color);
+
+    }
+    
+    Coordinates RotateAboutZAxis(Coordinates points, double radians)
+    {
+        double x0,y0,z0;
+        x0 = points.x * cos(radians) - points.y * sin(radians);
+        y0 = points.y * cos(radians) + points.x * sin(radians);
+        z0 = points.z;
+        
+//        cout << x0 << " " << y0 << " " << z0 << endl;
+
+        return AssignPointsAndColor(AssignCoordinates3d(x0, y0, z0), points.color);
+    }
+    
+    Coordinates RotateUVector(Coordinates p1, Coordinates p2)
+    {
+        return subtractVectors(p2, p1);
     }
     
     double AmbientLight(double ka, double I)

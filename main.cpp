@@ -93,7 +93,7 @@ void lightingAlgorithm4(){
 
     LightingUtils info(polygon, sphere);
     Coordinates lightSource = AssignCoordinates3d(200, 200, 50);
-    Coordinates vrP = AssignCoordinates3d(130, 150, 130);
+    Coordinates vrP = AssignCoordinates3d(130, 130, 130);
     info.setVRP(vrP);
     info.setLightSource(lightSource);
 
@@ -185,27 +185,39 @@ void threeDTransformations1(){
     
     LightingUtils info(polygon, sphere);
     Coordinates lightSource = AssignCoordinates3d(200, 200, 50);
-    Coordinates vrP = AssignCoordinates3d(130, 150, 130);
+    Coordinates vrP = AssignCoordinates3d(120, 50, 120);
     info.setVRP(vrP);
     info.setLightSource(lightSource);
     
     Coordinates coP = AssignCoordinates3d(0, 0, 50);
-    double alpha = 45,beta = -45;
+    double alpha = 45,beta = 0;
     Window w = ViewWindow(AssignCoordinates3d(-30, 30,0), AssignCoordinates3d(30, -30, 0));
     
     info.setWindow(w);
     info.setCOP(coP);
-    info.testAlignment3dA(beta, alpha, coP.z);
     
+    vector<int>sphTrans;
+    sphTrans.push_back(0);
+    sphTrans.push_back(1);
+
+    vector<int>polyTrans;
+    polyTrans.push_back(3);
+//    polyTrans.push_back(4);
+//    polyTrans.push_back(5);
+    
+    Coordinates T = AssignCoordinates3d(0, 30, 0);
+    info.TranslateObjects(T, sphTrans, polyTrans);
+    info.testAlignment3dA(beta, alpha, coP.z);
+
     info.ScaleEnvironment(sf);
-    //info.TranslateObjects(3);
+
     vector<Coordinates> pixels = info.getColoredPoints(coP);
     Image image;
     image.createCanvas(abs(info.getWindow().tl.x - info.getWindow().br.x)+1, abs(info.getWindow().br.y - info.getWindow().tl.y)+1, "255");
     image.uniformColor(245, 245, 245);
     image.DrawEnvironment(pixels);
     
-    image.writePPM("environment.jpg");
+    image.writePPM("3dTransProblem1.jpg");
     cout << "Finished"<< endl;
 }
 
@@ -213,124 +225,213 @@ void threeDTransformations2(){
     
     cout << "Running...." << endl;
     Pixels color1 = AssignPixels(255, 255, 255),color2  = AssignPixels(255, 255, 0),color3 = AssignPixels(255, 0, 0),color4 = AssignPixels(0, 255, 0);
-//    double pka = 0.2,pkd = 0.6,pks = 0.25,pn = 5;
-//    double ska = 0.2,skd = 0.6,sks = 0.25,sn = 10;
-//    Lighting lightingPolygons = AssignLighting(pka, pkd, pks, pn);
-//    Lighting lightingSpheres = AssignLighting(ska, skd, sks, sn);
-//    
-//    vector<vector<Coordinates>>polygon;
-//    
-//    vector<Coordinates>polygon1;
-//    polygon1.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color1,lightingPolygons));
-//    polygon1.push_back(AssignCoordinates3d(100,0,0));
-//    polygon1.push_back(AssignCoordinates3d(100,0,100));
-//    polygon1.push_back(AssignCoordinates3d(0,0,100));
-//    
-//    vector<Coordinates>polygon2;
-//    polygon2.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color1, lightingPolygons));
-//    polygon2.push_back(AssignCoordinates3d(0,100,0));
-//    polygon2.push_back(AssignCoordinates3d(0,100,100));
-//    polygon2.push_back(AssignCoordinates3d(0,0,100));
-//    
-//    vector<Coordinates>polygon3;
-//    polygon3.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color1, lightingPolygons));
-//    polygon3.push_back(AssignCoordinates3d(0,100,0));
-//    polygon3.push_back(AssignCoordinates3d(100,100,0));
-//    polygon3.push_back(AssignCoordinates3d(100,0,0));
-//    
-//    vector<Coordinates>polygon4;
-//    polygon4.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(10,30,85),color2, lightingPolygons));
-//    polygon4.push_back(AssignCoordinates3d(70,30,85));
-//    polygon4.push_back(AssignCoordinates3d(70,30,5));
-//    polygon4.push_back(AssignCoordinates3d(10,30,5));
-//    
-//    vector<Coordinates>polygon5;
-//    polygon5.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(60,0,80),color2, lightingPolygons));
-//    polygon5.push_back(AssignCoordinates3d(60,30,80));
-//    polygon5.push_back(AssignCoordinates3d(60,30,10));
-//    polygon5.push_back(AssignCoordinates3d(60,0,10));
-//    
-//    vector<Coordinates>polygon6;
-//    polygon6.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(20,0,80),color2, lightingPolygons));
-//    polygon6.push_back(AssignCoordinates3d(20,30,80));
-//    polygon6.push_back(AssignCoordinates3d(20,30,10));
-//    polygon6.push_back(AssignCoordinates3d(20,0,10));
-//    
-//    polygon.push_back(polygon1);
-//    polygon.push_back(polygon2);
-//    polygon.push_back(polygon3);
-//    polygon.push_back(polygon4);
-//    polygon.push_back(polygon5);
-//    polygon.push_back(polygon6);
-//    
-//    
-//    double r = 20;
-//    double r2 = 10;
-//    int sf = 2;
-//    vector<SphereCoordinates> sphere;
-//    SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(50, 80, 50), r, color3, lightingSpheres);
-//    
-//    SphereCoordinates sphere2 = AssignSphereWithLighting(AssignCoordinates3d(80, 50, 70), r2, color4, lightingSpheres);
-//    
-//    sphere.push_back(sphere1);
-//    sphere.push_back(sphere2);
+        double pka = 0.2,pkd = 0.6,pks = 0.25,pn = 5;
+        double ska = 0.2,skd = 0.6,sks = 0.25,sn = 10;
+        Lighting lightingPolygons = AssignLighting(pka, pkd, pks, pn);
+        Lighting lightingSpheres = AssignLighting(ska, skd, sks, sn);
     
-    vector<vector<Coordinates>>polygons;
-    vector<SphereCoordinates>spheres;
-    vector<Coordinates>polygon1;
-    polygon1.push_back(AssignCoordinates3d(10, 30, 85));
-    polygon1.push_back(AssignCoordinates3d(70, 30, 85));
-    polygon1.push_back(AssignCoordinates3d(70, 30, 5));
-    polygon1.push_back(AssignCoordinates3d(10, 30, 5));
-    polygons.push_back(polygon1);
-    SphereCoordinates sphere1;
-    sphere1 = AssignSphere(AssignCoordinates3d(50, 80, 50), 20, color1);
-    spheres.push_back(sphere1);
+        vector<vector<Coordinates>>polygon;
+    
+        vector<Coordinates>polygon1;
+        polygon1.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color1,lightingPolygons));
+        polygon1.push_back(AssignCoordinates3d(100,0,0));
+        polygon1.push_back(AssignCoordinates3d(100,0,100));
+        polygon1.push_back(AssignCoordinates3d(0,0,100));
+    
+        vector<Coordinates>polygon2;
+        polygon2.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color1, lightingPolygons));
+        polygon2.push_back(AssignCoordinates3d(0,100,0));
+        polygon2.push_back(AssignCoordinates3d(0,100,100));
+        polygon2.push_back(AssignCoordinates3d(0,0,100));
+    
+        vector<Coordinates>polygon3;
+        polygon3.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color1, lightingPolygons));
+        polygon3.push_back(AssignCoordinates3d(0,100,0));
+        polygon3.push_back(AssignCoordinates3d(100,100,0));
+        polygon3.push_back(AssignCoordinates3d(100,0,0));
+    
+        vector<Coordinates>polygon4;
+        polygon4.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(10,30,85),color2, lightingPolygons));
+        polygon4.push_back(AssignCoordinates3d(70,30,85));
+        polygon4.push_back(AssignCoordinates3d(70,30,5));
+        polygon4.push_back(AssignCoordinates3d(10,30,5));
+    
+        vector<Coordinates>polygon5;
+        polygon5.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(60,0,80),color2, lightingPolygons));
+        polygon5.push_back(AssignCoordinates3d(60,30,80));
+        polygon5.push_back(AssignCoordinates3d(60,30,10));
+        polygon5.push_back(AssignCoordinates3d(60,0,10));
+    
+        vector<Coordinates>polygon6;
+        polygon6.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(20,0,80),color2, lightingPolygons));
+        polygon6.push_back(AssignCoordinates3d(20,30,80));
+        polygon6.push_back(AssignCoordinates3d(20,30,10));
+        polygon6.push_back(AssignCoordinates3d(20,0,10));
+    
+        polygon.push_back(polygon1);
+        polygon.push_back(polygon2);
+        polygon.push_back(polygon3);
+        polygon.push_back(polygon4);
+        polygon.push_back(polygon5);
+        polygon.push_back(polygon6);
+    
+    
+        double r = 20;
+        double r2 = 10;
+        int sf = 2;
+        vector<SphereCoordinates> sphere;
+        SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(50, 80, 50), r, color3, lightingSpheres);
+    
+        SphereCoordinates sphere2 = AssignSphereWithLighting(AssignCoordinates3d(80, 50, 70), r2, color4, lightingSpheres);
+    
+        sphere.push_back(sphere1);
+        sphere.push_back(sphere2);
 
-    Coordinates T = AssignCoordinates3d(100, -20, -15);
-    LightingUtils info(polygons, spheres);
-    //info.TranslateObjects(T);
-    double objSf = 1.75;
-    Coordinates sfCoordinate = AssignCoordinates3d(10, 30, 85);
-    Coordinates rotation = AssignCoordinates3d(25, 105, 30);
-    double degrees = 25;
-    //info.ScaleObjects( sfCoordinate, objSf);
-    info.Rotate(rotation, degrees);
-//    Coordinates lightSource = AssignCoordinates3d(200, 200, 50);
-//    Coordinates vrP = AssignCoordinates3d(120, 40, 120);
-//    info.setVRP(vrP);
-//    info.setLightSource(lightSource);
-//    
-//    Coordinates coP = AssignCoordinates3d(0, 0, 50);
-//    double alpha = 45,beta = 0;
-//    Window w = ViewWindow(AssignCoordinates3d(-30, 30,0), AssignCoordinates3d(30, -30, 0));
-//    
-//    vector<int>sphTrans;
-//    sphTrans.push_back(0);
-//    vector<int>polyTrans;
-//    polyTrans.push_back(3);
-//    polyTrans.push_back(4);
-//    polyTrans.push_back(5);
-//
-//    double objSf = 0.5;
-//    Coordinates sfCoordinate = AssignCoordinates3d(10, 0, 40);
-//    
-//    info.setWindow(w);
-//    info.setCOP(coP);
-//    info.testAlignment3dA(beta, alpha, coP.z);
-//    
-//
-//    //info.ScaleEnvironment(sf);
-//    //info.TranslateObjects(3);
-//
-//    info.ScaleObjects(polyTrans, sphTrans, sfCoordinate, objSf);
-//    vector<Coordinates> pixels = info.getColoredPoints(coP);
-//    Image image;
-//    image.createCanvas(abs(info.getWindow().tl.x - info.getWindow().br.x)+1, abs(info.getWindow().br.y - info.getWindow().tl.y)+1, "255");
-//    image.uniformColor(245, 245, 245);
-//    image.DrawEnvironment(pixels);
+    LightingUtils info(polygon, sphere);
+
+        Coordinates lightSource = AssignCoordinates3d(200, 200, 50);
+        Coordinates vrP = AssignCoordinates3d(120, 50, 120);
+        info.setVRP(vrP);
+        info.setLightSource(lightSource);
     
-    //image.writePPM("environment.jpg");
+        Coordinates coP = AssignCoordinates3d(0, 0, 50);
+        double alpha = 45,beta = 0;
+        Window w = ViewWindow(AssignCoordinates3d(-30, 30,0), AssignCoordinates3d(30, -30, 0));
+    
+        vector<int>sphScale;
+        sphScale.push_back(0);
+        vector<int>polyScale;
+        polyScale.push_back(3);
+        polyScale.push_back(4);
+        polyScale.push_back(5);
+    
+        double objSf = 0.5;
+        Coordinates sfCoordinate = AssignCoordinates3d(10, 0, 40);
+    
+        info.setWindow(w);
+        info.setCOP(coP);
+    
+    
+    info.ScaleObjects(polyScale, sphScale, sfCoordinate, objSf);
+    info.testAlignment3dA(beta, alpha, coP.z);
+
+    info.ScaleEnvironment(sf);
+
+        vector<Coordinates> pixels = info.getColoredPoints(coP);
+        Image image;
+        image.createCanvas(abs(info.getWindow().tl.x - info.getWindow().br.x)+1, abs(info.getWindow().br.y - info.getWindow().tl.y)+1, "255");
+        image.uniformColor(245, 245, 245);
+        image.DrawEnvironment(pixels);
+    
+    image.writePPM("3dTransformations2.jpg");
+    cout << "Finished"<< endl;
+}
+
+void threeDTransformations3(){
+    
+    cout << "Running...." << endl;
+    Pixels color1 = AssignPixels(255, 255, 255),color2  = AssignPixels(255, 255, 0),color3 = AssignPixels(255, 0, 0),color4 = AssignPixels(0, 255, 0);
+    double pka = 0.2,pkd = 0.6,pks = 0.25,pn = 5;
+    double ska = 0.2,skd = 0.6,sks = 0.25,sn = 10;
+    Lighting lightingPolygons = AssignLighting(pka, pkd, pks, pn);
+    Lighting lightingSpheres = AssignLighting(ska, skd, sks, sn);
+    
+    vector<vector<Coordinates>>polygon;
+    
+    vector<Coordinates>polygon1;
+    polygon1.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color1,lightingPolygons));
+    polygon1.push_back(AssignCoordinates3d(100,0,0));
+    polygon1.push_back(AssignCoordinates3d(100,0,100));
+    polygon1.push_back(AssignCoordinates3d(0,0,100));
+    
+    vector<Coordinates>polygon2;
+    polygon2.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color1, lightingPolygons));
+    polygon2.push_back(AssignCoordinates3d(0,100,0));
+    polygon2.push_back(AssignCoordinates3d(0,100,100));
+    polygon2.push_back(AssignCoordinates3d(0,0,100));
+    
+    vector<Coordinates>polygon3;
+    polygon3.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color1, lightingPolygons));
+    polygon3.push_back(AssignCoordinates3d(0,100,0));
+    polygon3.push_back(AssignCoordinates3d(100,100,0));
+    polygon3.push_back(AssignCoordinates3d(100,0,0));
+    
+    vector<Coordinates>polygon4;
+    polygon4.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(10,30,85),color2, lightingPolygons));
+    polygon4.push_back(AssignCoordinates3d(70,30,85));
+    polygon4.push_back(AssignCoordinates3d(70,30,5));
+    polygon4.push_back(AssignCoordinates3d(10,30,5));
+    
+    vector<Coordinates>polygon5;
+    polygon5.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(60,0,80),color2, lightingPolygons));
+    polygon5.push_back(AssignCoordinates3d(60,30,80));
+    polygon5.push_back(AssignCoordinates3d(60,30,10));
+    polygon5.push_back(AssignCoordinates3d(60,0,10));
+    
+    vector<Coordinates>polygon6;
+    polygon6.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(20,0,80),color2, lightingPolygons));
+    polygon6.push_back(AssignCoordinates3d(20,30,80));
+    polygon6.push_back(AssignCoordinates3d(20,30,10));
+    polygon6.push_back(AssignCoordinates3d(20,0,10));
+    
+    polygon.push_back(polygon1);
+    polygon.push_back(polygon2);
+    polygon.push_back(polygon3);
+    polygon.push_back(polygon4);
+    polygon.push_back(polygon5);
+    polygon.push_back(polygon6);
+    
+    
+    double r = 20;
+    double r2 = 10;
+    int sf = 2;
+    vector<SphereCoordinates> sphere;
+    SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(50, 80, 50), r, color3, lightingSpheres);
+    
+    SphereCoordinates sphere2 = AssignSphereWithLighting(AssignCoordinates3d(80, 50, 70), r2, color4, lightingSpheres);
+    
+    sphere.push_back(sphere1);
+    sphere.push_back(sphere2);
+//
+
+
+    LightingUtils info(polygon, sphere);
+    Coordinates TCoordinate = AssignCoordinates3d(0, 30, 0);
+    Coordinates lightSource = AssignCoordinates3d(200, 200, 50);
+    Coordinates vrP = AssignCoordinates3d(120, 50, 120);
+    info.setVRP(vrP);
+    info.setLightSource(lightSource);
+    Coordinates coP = AssignCoordinates3d(0, 0, 50);
+    double alpha = 45,beta = 0;
+    Window w = ViewWindow(AssignCoordinates3d(-30, 30,0), AssignCoordinates3d(30, -30, 0));
+    vector<int>TPoly;
+    vector<int>TSph;
+    TSph.push_back(1);
+
+    info.TranslateObjects(TCoordinate, TSph, TPoly);
+    info.setWindow(w);
+    info.setCOP(coP);
+    vector<int>SphR;
+    vector<int>PolyR;
+    double degreesR = 45;
+    SphR.push_back(0);
+    PolyR.push_back(3);
+    PolyR.push_back(4);
+    PolyR.push_back(5);
+    Coordinates p1 = AssignCoordinates3d(60, 0, 80);
+    Coordinates p2 = AssignCoordinates3d(60, 0, 10);
+
+    info.Rotate(SphR, PolyR, degreesR, p1, p2);
+    info.testAlignment3dA(beta, alpha, coP.z);
+    info.ScaleEnvironment(sf);
+
+    vector<Coordinates> pixels = info.getColoredPoints(coP);
+    Image image;
+    image.createCanvas(abs(info.getWindow().tl.x - info.getWindow().br.x)+1, abs(info.getWindow().br.y - info.getWindow().tl.y)+1, "255");
+    image.uniformColor(245, 245, 245);
+    image.DrawEnvironment(pixels);
+    
+    image.writePPM("3dtransproblem3.jpg");
     cout << "Finished"<< endl;
 }
 
@@ -1114,22 +1215,12 @@ void house3dPoints(int beta, int alpha, string problem, Coordinates vrpPoints)
 int main(int argc, const char * argv[]) {
     // insert code here...
 
-    ///DrawEllipse();
-    //problem1();
-    //problem2();
-    /*problem3();
-    problem4();
-    problem5();
-    problem6();
-    problem7();
-    problem8();
-    problem10();
-     // Line3d();
+    threeDTransformations1();
+    threeDTransformations2();
+    threeDTransformations3();
 
-*/
 
-    lightingAlgorithm4();
-    
+    //lightingAlgorithm4();
        return 0;
     
 }
