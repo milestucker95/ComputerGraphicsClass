@@ -511,13 +511,10 @@ public:
             int polyToChange = poly[i];
             for(int j = 0;j <polygons[polyToChange].size();j++)
             {
-//               cout << polygons[polyToChange][j].x << " " << polygons[polyToChange][j].y << " " << polygons[polyToChange][j].z << endl;
-//                cout << "polygon to change: " << polyToChange << endl;
-//                cout << "j: " << j << endl;
+
                 polygons[polyToChange][j].x += xT;
                 polygons[polyToChange][j].y += yT;
                 polygons[polyToChange][j].z += zT;
-//                cout << polygons[polyToChange][j].x << " " << polygons[polyToChange][j].y << " " << polygons[polyToChange][j].z << endl;
 
             }
         }

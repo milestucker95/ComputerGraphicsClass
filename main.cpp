@@ -25,6 +25,243 @@
 using namespace std;
 
 
+vector<SphereCoordinates> getStars()
+{
+    vector<vector<Coordinates>>polygon;
+      Pixels color1 = AssignPixels(0, 0, 255),color2  = AssignPixels(255, 255, 0),color3 = AssignPixels(255, 0, 0),color4 = AssignPixels(0, 255, 0), color5 = AssignPixels(0, 0, 255), color6 = AssignPixels(255, 255, 255), color7 = AssignPixels(0, 135, 167), starColor = AssignPixels(248, 247, 255);
+    double ska = 0.2,skd = 0.6,sks = 0.25,sn = 10;
+
+    Lighting lightingSpheres = AssignLighting(ska, skd, sks, sn);
+    vector<SphereCoordinates> sphere;
+    int r = 1;
+    
+    SphereCoordinates star1 = AssignSphereWithLighting(AssignCoordinates3d(150, 50, 70), r, color6, lightingSpheres);
+    SphereCoordinates star2 = AssignSphereWithLighting(AssignCoordinates3d(120, 65, 70), r, color6, lightingSpheres);
+    SphereCoordinates star3 = AssignSphereWithLighting(AssignCoordinates3d(30, 30, 70), r, color6, lightingSpheres);
+    SphereCoordinates star4 = AssignSphereWithLighting(AssignCoordinates3d(63, 23, 86), r, color6, lightingSpheres);
+    SphereCoordinates star5 = AssignSphereWithLighting(AssignCoordinates3d(70, 50, 70), r, color6, lightingSpheres);
+    SphereCoordinates star6 = AssignSphereWithLighting(AssignCoordinates3d(80, 50, 50), r, color6, lightingSpheres);
+    SphereCoordinates star7 = AssignSphereWithLighting(AssignCoordinates3d(-50, 50, 70), r, color6, lightingSpheres);
+    SphereCoordinates star8 = AssignSphereWithLighting(AssignCoordinates3d(-120, 65, 70), r, color6, lightingSpheres);
+    SphereCoordinates star9 = AssignSphereWithLighting(AssignCoordinates3d(-30, 30, 70), r, color6, lightingSpheres);
+    SphereCoordinates star10 = AssignSphereWithLighting(AssignCoordinates3d(-63, 23, 86), r, color6, lightingSpheres);
+    SphereCoordinates star11 = AssignSphereWithLighting(AssignCoordinates3d(-70, 50, 70), r, color6, lightingSpheres);
+    SphereCoordinates star12 = AssignSphereWithLighting(AssignCoordinates3d(-80, 50, 50), r, color6, lightingSpheres);
+    SphereCoordinates star13 = AssignSphereWithLighting(AssignCoordinates3d(150, 100, 70), r, color6, lightingSpheres);
+    SphereCoordinates star14 = AssignSphereWithLighting(AssignCoordinates3d(120, 115, 70), r, color6, lightingSpheres);
+    SphereCoordinates star15 = AssignSphereWithLighting(AssignCoordinates3d(30, 80, 70), r, color6, lightingSpheres);
+    SphereCoordinates star16 = AssignSphereWithLighting(AssignCoordinates3d(63, 75, 86), r, color6, lightingSpheres);
+    SphereCoordinates star17 = AssignSphereWithLighting(AssignCoordinates3d(70, 100, 70), r, color6, lightingSpheres);
+    SphereCoordinates star18 = AssignSphereWithLighting(AssignCoordinates3d(80, 100, 50), r, color6, lightingSpheres);
+    SphereCoordinates star19 = AssignSphereWithLighting(AssignCoordinates3d(-50, 100, 70), r, color6, lightingSpheres);
+    SphereCoordinates star20 = AssignSphereWithLighting(AssignCoordinates3d(-120, 115, 70), r, color6, lightingSpheres);
+    SphereCoordinates star21 = AssignSphereWithLighting(AssignCoordinates3d(-30, 80, 70), r, color6, lightingSpheres);
+    SphereCoordinates star22 = AssignSphereWithLighting(AssignCoordinates3d(-63, 75, 86), r, color6, lightingSpheres);
+    SphereCoordinates star23 = AssignSphereWithLighting(AssignCoordinates3d(-70, 100, 70), r, color6, lightingSpheres);
+    SphereCoordinates star24 = AssignSphereWithLighting(AssignCoordinates3d(-80, 100, 50), r, color6, lightingSpheres);
+    SphereCoordinates star25 = AssignSphereWithLighting(AssignCoordinates3d(170, 100, 70), r, color6, lightingSpheres);
+    SphereCoordinates star26 = AssignSphereWithLighting(AssignCoordinates3d(180, 100, 50), r, color6, lightingSpheres);
+    SphereCoordinates star27 = AssignSphereWithLighting(AssignCoordinates3d(-170, 100, 70), r, color6, lightingSpheres);
+    SphereCoordinates star28 = AssignSphereWithLighting(AssignCoordinates3d(-150, 115, 70), r, color6, lightingSpheres);
+    SphereCoordinates star29 = AssignSphereWithLighting(AssignCoordinates3d(-190, 80, 70), r, color6, lightingSpheres);
+    SphereCoordinates star30 = AssignSphereWithLighting(AssignCoordinates3d(-130, 75, 86), r, color6, lightingSpheres);
+    SphereCoordinates star31 = AssignSphereWithLighting(AssignCoordinates3d(130, 100, 70), r, color6, lightingSpheres);
+    SphereCoordinates star32 = AssignSphereWithLighting(AssignCoordinates3d(-80, -20, 50), r, color6, lightingSpheres);
+//    SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(150, 50, 70), r, color6, lightingSpheres);
+//    SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(150, 50, 70), r, color6, lightingSpheres);
+//    SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(150, 50, 70), r, color6, lightingSpheres);
+//    SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(150, 50, 70), r, color6, lightingSpheres);
+//    SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(150, 50, 70), r, color6, lightingSpheres);
+//    SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(150, 50, 70), r, color6, lightingSpheres);
+//    SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(150, 50, 70), r, color6, lightingSpheres);
+//    SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(150, 50, 70), r, color6, lightingSpheres);
+//    SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(150, 50, 70), r, color6, lightingSpheres);
+//    SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(150, 50, 70), r, color6, lightingSpheres);
+    sphere.push_back(star1);
+    sphere.push_back(star2);
+    sphere.push_back(star3);
+    sphere.push_back(star4);
+    sphere.push_back(star5);
+    sphere.push_back(star6);
+    sphere.push_back(star7);
+    sphere.push_back(star8);
+    sphere.push_back(star9);
+    sphere.push_back(star10);
+    sphere.push_back(star11);
+    sphere.push_back(star12);
+    sphere.push_back(star13);
+    sphere.push_back(star14);
+    sphere.push_back(star15);
+    sphere.push_back(star16);
+    sphere.push_back(star17);
+    sphere.push_back(star18);
+    sphere.push_back(star19);
+    sphere.push_back(star20);
+    sphere.push_back(star21);
+    sphere.push_back(star22);
+    sphere.push_back(star23);
+    sphere.push_back(star24);
+    sphere.push_back(star25);
+    sphere.push_back(star26);
+    sphere.push_back(star27);
+    sphere.push_back(star28);
+    sphere.push_back(star29);
+    sphere.push_back(star30);
+    sphere.push_back(star31);
+    sphere.push_back(star32);
+
+//    cout << "chicken" << endl;
+   return sphere;
+
+}
+void animation()
+{
+    cout << "Running...." << endl;
+        Pixels color1 = AssignPixels(0, 0, 255),color2  = AssignPixels(255, 255, 0),color3 = AssignPixels(255, 0, 0),color4 = AssignPixels(0, 255, 0), color5 = AssignPixels(0, 0, 255), color6 = AssignPixels(255, 255, 245), color7 = AssignPixels(0, 135, 167), starColor = AssignPixels(248, 247, 255), sun = AssignPixels(252, 212, 64), white = AssignPixels(255,255 ,255);
+    double pka = 0.2,pkd = 0.6,pks = 0.25,pn = 5;
+    double ska = 0.2,skd = 0.6,sks = 0.25,sn = 10;
+    Lighting lightingPolygons = AssignLighting(pka, pkd, pks, pn);
+    Lighting lightingSpheres = AssignLighting(ska, skd, sks, sn);
+    vector<vector<Coordinates>>polygon;
+
+//    vector<Coordinates>polygon1;
+//    polygon1.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color7,lightingPolygons));
+//    polygon1.push_back(AssignCoordinates3d(100,0,0));
+//    polygon1.push_back(AssignCoordinates3d(100,0,100));
+//    polygon1.push_back(AssignCoordinates3d(0,0,100));
+    
+    vector<Coordinates>polygon2;
+    polygon2.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(0,0,0),color2, lightingPolygons));
+    polygon2.push_back(AssignCoordinates3d(0,100,0));
+    polygon2.push_back(AssignCoordinates3d(0,100,100));
+    polygon2.push_back(AssignCoordinates3d(0,0,100));
+    
+//    
+//    vector<Coordinates>polygon3;
+//    polygon3.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(100,60,100),starColor, lightingPolygons));
+//    polygon3.push_back(AssignCoordinates3d(120,100,100));
+//    polygon3.push_back(AssignCoordinates3d(140,60,100));
+//    
+//    vector<Coordinates>polygon4;
+//    polygon4.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(10,30,85),starColor, lightingPolygons));
+//    polygon4.push_back(AssignCoordinates3d(20,50,85));
+//    polygon4.push_back(AssignCoordinates3d(30,30,85));
+////    polygon4.push_back(AssignCoordinates3d(10,30,5));
+//    
+//    vector<Coordinates>polygon5;
+//    polygon5.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(60,0,80),color1, lightingPolygons));
+//    polygon5.push_back(AssignCoordinates3d(60,30,80));
+//    polygon5.push_back(AssignCoordinates3d(60,30,10));
+//    polygon5.push_back(AssignCoordinates3d(60,0,10));
+//    
+//    vector<Coordinates>polygon6;
+//    polygon6.push_back(AssignPointsAndColorAndLighting(AssignCoordinates3d(20,0,80),color6, lightingPolygons));
+//    polygon6.push_back(AssignCoordinates3d(20,30,80));
+//    polygon6.push_back(AssignCoordinates3d(20,30,10));
+//    polygon6.push_back(AssignCoordinates3d(20,0,10));
+    
+//    polygon.push_back(polygon1);
+    polygon.push_back(polygon2);
+//    polygon.push_back(polygon3);
+//    polygon.push_back(polygon4);
+//    polygon.push_back(polygon5);
+//    polygon.push_back(polygon6);
+
+    double r = 20;
+    double r2 = 10;
+    double r3 = 20;
+    double sunRadius = 25;
+    int sf = 2;
+    
+    Pixels sphereColor1 = color3, sphereColor2 = color1, sphereColor3 = color7, sphereColor5 = white;
+
+    int coPCounter = 0;
+    int sunCounter = 1;
+    
+
+    vector<SphereCoordinates> sphere;
+    vector<SphereCoordinates>stars;
+    for(int i = 0 ; i< 150;i++)
+    {
+        stars = getStars();
+
+        sphere.insert(sphere.begin(), stars.begin(), stars.end());
+
+        Coordinates vrP = AssignCoordinates3d(130, 130, 130);
+        Coordinates coP = AssignCoordinates3d(0, 0, 50);
+
+        SphereCoordinates sphere4;
+        if(i<75)
+        {
+            sphere4 = AssignSphereWithLighting(AssignCoordinates3d(120, 130, 50), sunRadius, sun, lightingSpheres);
+
+            
+        }
+        else{
+            
+            sphere4 = AssignSphereWithLighting(AssignCoordinates3d(120, 130 - (sunCounter+=5), 50), sunRadius, sun, lightingSpheres);
+
+        }
+
+
+    SphereCoordinates sphere1 = AssignSphereWithLighting(AssignCoordinates3d(150 - (i+5), 50, 70), r, sphereColor1, lightingSpheres);
+    
+    SphereCoordinates sphere2 = AssignSphereWithLighting(AssignCoordinates3d(-50 + (i+5), 50, 90), r2, sphereColor2, lightingSpheres);
+    SphereCoordinates sphere3 = AssignSphereWithLighting(AssignCoordinates3d(50, 50+i, 70), r2, sphereColor3, lightingSpheres);
+    SphereCoordinates sphere5 = AssignSphereWithLighting(AssignCoordinates3d(-125, -100, 70), r3, sphereColor5, lightingSpheres);
+        
+        if(sphere1.center.x >= (sphere2.center.x-r2) && sphere1.center.x <= (sphere2.center.x+r2) && sphere1.center.y >= (sphere2.center.y-r2) && sphere1.center.y <= (sphere2.center.y+r2) )
+        {
+            sphereColor1 = color4;
+            sphereColor2 = color1;
+        }
+    
+    sphere.push_back(sphere4);
+    sphere.push_back(sphere1);
+    sphere.push_back(sphere2);
+    sphere.push_back(sphere3);
+    sphere.push_back(sphere5);
+    
+
+    
+    LightingUtils info(polygon, sphere);
+    Coordinates lightSource = AssignCoordinates3d(200, 200, 50);
+        
+
+    info.setVRP(vrP);
+    info.setLightSource(lightSource);
+    
+    double alpha = 45,beta = -45;
+    Window w = ViewWindow(AssignCoordinates3d(-50, 50,0), AssignCoordinates3d(50, -50, 0));
+    
+    info.setWindow(w);
+    info.setCOP(coP);
+        vector<int>PolyR;
+        vector<int>SphR;
+        double degreesR = 5*i;
+        PolyR.push_back(0);
+        SphR.push_back(4);
+        Coordinates p1 = AssignCoordinates3d(50, 50, 100);
+        Coordinates p2 = AssignCoordinates3d(50, 50, 0);
+        info.Rotate(SphR, PolyR, degreesR, p1, p2);
+
+    info.testAlignment3dA(beta, alpha, coP.z);
+    
+    info.ScaleEnvironment(sf);
+    //info.TranslateObjects(3);
+    vector<Coordinates> pixels = info.getColoredPoints(coP);
+    Image image;
+    image.createCanvas(abs(info.getWindow().tl.x - info.getWindow().br.x)+1, abs(info.getWindow().br.y - info.getWindow().tl.y)+1, "255");
+    image.uniformColor(245, 245, 245);
+    image.DrawEnvironment(pixels);
+    
+    image.writePPM("animation"+to_string(i)+ ".jpg");
+        sphere.clear();
+    }
+    cout << "Finished"<< endl;
+
+}
+
 void lightingAlgorithm4(){
     
     cout << "Running...." << endl;
@@ -436,384 +673,215 @@ void threeDTransformations3(){
     cout << "Finished"<< endl;
 }
 
-/*void problem1()
-{
-    Image info;
-    info.createCanvas(320, 240, "255");
-    info.uniformColor(245, 245, 245);
-    Line line(60,120, 160,120);
-    Line line2(160,120, 160,220);
-    
-    line.Translate(line.getInitialVertexPoints(), 50, -50);
-    line2.Translate(line2.getInitialVertexPoints(), 50, -50);
-    
-    info.Draw(line.drawLine(line.getPoints()), 255, 0, 0);
-    info.Draw(line2.drawLine(line2.getPoints()), 0, 255, 0);
-    info.writePPM("problem01.jpg");
-
-}
- */
-/*
-void problem2()
-{
-    Image info;
-    info.createCanvas(320, 240, "255");
-    info.uniformColor(245, 245, 245);
-    Line line(60,120, 160,120);
-    Line line2(160,120, 160,220);
-    
-    line.Rotate(line.getInitialVertexPoints(), 160, 120, 45);
-    line2.Rotate(line2.getInitialVertexPoints(), 160, 120, 45);
-    info.Draw(line.drawLine(line.getPoints()), 255, 0, 0);
-    info.Draw( line2.drawLine(line2.getPoints()), 0, 255, 0);
-    info.writePPM("problem02.jpg");
-}
-
-/*void problem3()
-{
-    Image info;
-    info.createCanvas(320, 240, "255");
-    info.uniformColor(245, 245, 245);
-    Line line(60,120, 160,120);
-    Line line2(160,120, 160,220);
-    
-    line.Scale(line.getInitialVertexPoints(), 160, 120, 0.5, 0.5);
-    line2.Scale(line2.getInitialVertexPoints(), 160, 120, 0.5, 0.5);
-    info.Draw(line.drawLine(line.getPoints()), 255, 0, 0);
-    info.Draw(line2.drawLine(line2.getPoints()), 0, 255, 0);
-    info.writePPM("problem03.ppm");
-}
-
-void problem4()
-{
-    Image info;
-    info.createCanvas(320, 240, "255");
-    info.uniformColor(245, 245, 245);
-    Line line(60,120, 160,120);
-    Line line2(160,120, 160,220);
-    line.Rotate(line.getInitialVertexPoints(), 160, 120, 45);
-    line2.Rotate(line2.getInitialVertexPoints(), 160, 120, 45);
-
-    line.Scale(line.getPoints(), 160, 120, 0.5, 0.5);
-    line2.Scale(line2.getPoints(), 160, 120, 0.5, 0.5);
-    
-    line.Translate(line.getPoints(), 50, 50);
-    line2.Translate(line2.getPoints(), 50, 50);
-    line.drawLine(line.getPoints());
-    line2.drawLine(line2.getPoints());
-    info.Draw(line.getLinePoints(), 255, 0, 0);
-    info.Draw(line2.getLinePoints(), 0, 255, 0);
-    info.writePPM("problem04.ppm");
-
-}
-
-void problem5()
-{
-    
-    Image info;
-    info.createCanvas(320, 240, "255");
-    info.uniformColor(245, 245, 245);
-    
-    Polygon polygon;
-    std::vector<std::pair <int,int>>polygonPoints;
-
-
-    polygonPoints.push_back(std::pair<int, int>(60, 120));
-    polygonPoints.push_back(std::pair<int, int>(110, 200));
-    polygonPoints.push_back(std::pair<int, int>(110, 150));
-    polygonPoints.push_back(std::pair<int, int>(200, 220));
-    polygonPoints.push_back(std::pair<int, int>(160, 120));
-    polygon.Translate(polygonPoints, 50, -30);
-    polygon.getPolygonPoints(polygon.Transformations::getPoints());
-    polygon.drawPolygon();
-    info.Draw(polygon.getPoints(), 255, 0, 0);
-    info.writePPM("problem05.ppm");
-
-}
-
-void problem6()
-{
-    
-    Image info;
-    info.createCanvas(320, 240, "255");
-    info.uniformColor(245, 245, 245);
-    
-    Polygon polygon;
-    std::vector<std::pair <int,int>>polygonPoints;
-    
-    
-    polygonPoints.push_back(std::pair<int, int>(60, 120));
-    polygonPoints.push_back(std::pair<int, int>(110, 200));
-    polygonPoints.push_back(std::pair<int, int>(110, 150));
-    polygonPoints.push_back(std::pair<int, int>(200, 220));
-    polygonPoints.push_back(std::pair<int, int>(160, 120));
-    polygon.Translate(polygonPoints, 50, -30);
-    polygon.Scale(polygon.Transformations::getPoints(), 160, 120, 1.5, 1.5);
-    polygon.getPolygonPoints(polygon.Transformations::getPoints());
-    polygon.drawPolygon();
-    info.Draw(polygon.getPoints(), 255, 0, 0);
-    info.writePPM("problem06.ppm");
-    
-}
-
-void problem7()
-{
-    Image info;
-    info.createCanvas(320, 240, "255");
-    info.uniformColor(245, 245, 245);
-    
-    Polygon polygon;
-    std::vector<std::pair <int,int>>polygonPoints;
-    
-    
-    polygonPoints.push_back(std::pair<int, int>(60, 120));
-    polygonPoints.push_back(std::pair<int, int>(110, 200));
-    polygonPoints.push_back(std::pair<int, int>(110, 150));
-    polygonPoints.push_back(std::pair<int, int>(200, 220));
-    polygonPoints.push_back(std::pair<int, int>(160, 120));
-    polygon.Translate(polygonPoints, 50, -30);
-    polygon.Scale(polygon.Transformations::getPoints(), 160, 120, 1.5, 1.5);
-    polygon.Rotate(polygon.Transformations::getPoints(), 160, 120, -80);
-    polygon.getPolygonPoints(polygon.Transformations::getPoints());
-    polygon.drawPolygon();
-    info.Draw(polygon.getPoints(), 255, 0, 0);
-    info.writePPM("problem07.ppm");
-}
-
-void problem8()
-{
-    Image info;
-    info.createCanvas(320, 240, "255");
-    info.uniformColor(245, 245, 245);
-    
-    Polygon polygon;
-    std::vector<std::pair <int,int>>polygonPoints;
-    
-    
-    polygonPoints.push_back(std::pair<int, int>(60, 120));
-    polygonPoints.push_back(std::pair<int, int>(110, 200));
-    polygonPoints.push_back(std::pair<int, int>(110, 150));
-    polygonPoints.push_back(std::pair<int, int>(200, 220));
-    polygonPoints.push_back(std::pair<int, int>(160, 120));
-    polygon.Translate(polygonPoints, 50, -30);
-    polygon.Rotate(polygon.Transformations::getPoints(), 160, 120, -80);
-    polygon.Scale(polygon.Transformations::getPoints(), 160, 120, 1.5, 1.5);
-    polygon.getPolygonPoints(polygon.Transformations::getPoints());
-    polygon.drawPolygon();
-    polygon.fill();
-    info.Draw(polygon.getFillPoints(), 255, 0, 0);
-    info.writePPM("problem08.ppm");
-}
-
-void problem10()
-{
-    Image info;
-    info.createCanvas(320, 240, "255");
-    info.uniformColor(255, 255, 255);
-    
-    Circle head(160,200,20);
-    //head.fillCircle();
-    info.Draw(head.getPoints(), 0, 0, 0);
-    info.Draw(head.getFillPoints(), 255, 255, 0);
-
-    
-    Line neck(160, 180,160,170);
-   //cout << "neck size: " << neck.drawLine(neck.getInitialVertexPoints()).size() << endl;
-    info.Draw(neck.drawLine(neck.getInitialVertexPoints()), 0, 0, 0);
-    
-    Polygon body;
-    std::vector<std::pair <int,int>>polygonPoints;
-    polygonPoints.push_back(std::pair<int, int>(130,170));
-    polygonPoints.push_back(std::pair<int, int>(190,170));
-    polygonPoints.push_back(std::pair<int, int>(190,110));
-    polygonPoints.push_back(std::pair<int, int>(130,110));
-    body.getPolygonPoints(polygonPoints);
-    body.drawPolygon();
-    body.fill();
-    info.Draw(body.getFillPoints(), 0, 0, 255);
-    info.Draw(body.getPoints(), 255, 0, 0);
-
-    Line rightArm(130,170, 100,100);
-    info.Draw(rightArm.drawLine(rightArm.getInitialVertexPoints()), 0, 0, 0);
-
-    Line leftArm(190,170, 220,100);
-    info.Draw(leftArm.drawLine(leftArm.getInitialVertexPoints()), 0, 0, 0);
-    
-    Circle rightHand(100,100,10);
-    //rightHand.fillCircle();
-    info.Draw(rightHand.getFillPoints(), 255, 0, 0);
-    info.Draw(rightHand.getPoints(), 0, 255, 0);
-
-    
-    Circle leftHand(220,100,10);
-    //leftHand.fillCircle();
-    info.Draw(leftHand.getFillPoints(), 255, 0, 0);
-    info.Draw(leftHand.getPoints(), 0, 255, 0);
-
-    Line rightLeg(140,110,120,50);
-    info.Draw(rightLeg.drawLine(rightLeg.getInitialVertexPoints()), 0, 0, 0);
-
-    Line leftLeg(180,110,200,50);
-    info.Draw(leftLeg.drawLine(leftLeg.getInitialVertexPoints()), 0, 0, 0);
-
-    Ellipse rightFoot(120,50,20,5);
-    rightFoot.fillEllipse();
-    info.Draw(rightFoot.getFillPoints(), 0, 255, 0);
-    info.Draw(rightFoot.getPoints(), 0, 0, 255);
-    
-    Ellipse leftFoot(200,50,20,5);
-    leftFoot.fillEllipse();
-    info.Draw(leftFoot.getFillPoints(), 0, 255, 0);
-    info.Draw(leftFoot.getPoints(), 0, 0, 255);
-
-    Line pole(100,125, 100,50);
-    Polygon flag;
-    std::vector<std::pair <int,int>>flagPoints;
-    flagPoints.push_back(std::pair<int, int>(100,125));
-    flagPoints.push_back(std::pair<int, int>(100,95));
-    flagPoints.push_back(std::pair<int, int>(60,110));
-    flag.Translate(flagPoints, 0, 35);
-    flag.Rotate(flag.Transformations::getPoints(), 100, 100, 45);
-    flag.Scale(flag.Transformations::getPoints(), 100, 100, 1.25, 1.25);
-    flag.getPolygonPoints(flag.Transformations::getPoints());
-    flag.drawPolygon();
-    flag.fill();
-    
-    pole.Translate(pole.getInitialVertexPoints(), 0, 35);
-    pole.Rotate(pole.getPoints(), 100, 100, 45);
-    pole.Scale(pole.getPoints(), 100, 100, 1.25, 1.25);
-    
-    info.Draw(pole.drawLine(pole.getPoints()), 0, 0, 0);
-    
-    info.Draw(flag.getPoints(), 0, 0, 0);
-    info.Draw(flag.getFillPoints(), 255, 0, 255);
-
-    
-    info.writePPM("problem10.ppm");
-
-
-}
-
-void manAndCar()
-{
-    Image info;
-    info.createCanvas(1000, 500, "255");
-    info.uniformColor(245, 245, 245);
-    
-    int xT = 0;
-    int yT = 0;
-    double degrees = 0;
-    double rotate = 0;
-    Polygon grass;
-    std::vector<std::pair <int,int>>grassPoints;
-    grassPoints.push_back(std::pair<int, int>(0, 0));
-    grassPoints.push_back(std::pair<int, int>(0, 250));
-    grassPoints.push_back(std::pair<int, int>(1000, 250));
-    grassPoints.push_back(std::pair<int, int>(1000, 0));
-    grass.getPolygonPoints(grassPoints);
-    grass.drawPolygon();
-    grass.fill();
-    info.Draw(grass.getFillPoints(), 44, 176, 55);
-    info.Draw(grass.getPoints(), 44, 176, 55);
-    
-    Polygon sky;
-    std::vector<std::pair <int,int>>skyPoints;
-    skyPoints.push_back(std::pair<int, int>(0, 500));
-    skyPoints.push_back(std::pair<int, int>(1000, 500));
-    skyPoints.push_back(std::pair<int, int>(1000, 250));
-    skyPoints.push_back(std::pair<int, int>(0, 250));
-    sky.getPolygonPoints(skyPoints);
-    sky.drawPolygon();
-    sky.fill();
-    info.Draw(sky.getFillPoints(), 0,191,255);
-    info.Draw(sky.getPoints(), 0,191,255);
-    
-    Circle sun(900,400,35);
-    sun.buildCircle(sun.getCircleCenterPoints());
-    sun.fillCircle();
-    
-    Circle head(750,200,20);
-    head.buildCircle(head.getCircleCenterPoints());
-    head.fillCircle();
-    Line neck(750, 180,750,170);
-    
-    Polygon humanBody;
-    std::vector<std::pair <int,int>>humanBodyPoints;
-    humanBodyPoints.push_back(std::pair<int, int>(720,170));
-    humanBodyPoints.push_back(std::pair<int, int>(780,170));
-    humanBodyPoints.push_back(std::pair<int, int>(780,110));
-    humanBodyPoints.push_back(std::pair<int, int>(720,110));
-    humanBody.getPolygonPoints(humanBodyPoints);
-    humanBody.drawPolygon();
-    humanBody.fill();
-    Line rightLeg(730,110,710,50);
-    Line leftLeg(770,110,790,50);
-    Ellipse rightFoot(710,50,20,5);
-    rightFoot.buildEllipse(rightFoot.getEllipseCenterPoints());
-    rightFoot.fillEllipse();
-    Ellipse leftFoot(790,50,20,5);
-    leftFoot.buildEllipse(leftFoot.getEllipseCenterPoints());
-    leftFoot.fillEllipse();
-    
-    for(int i =1;i<=95;i++)
-    {
-        info.uniformColor(245, 245, 245);
-        double lineLength;
-        
-        std::vector<std::pair <int,int>>roofPoints;
-        roofPoints.push_back(std::pair<int, int>(155, 160));
-        roofPoints.push_back(std::pair<int, int>(200, 180));
-        roofPoints.push_back(std::pair<int, int>(300, 180));
-        roofPoints.push_back(std::pair<int, int>(320, 160));
-        Polygon roof;
-        roof.Translate(roofPoints, xT, yT);
-        roof.getPolygonPoints(roof.Transformations::getPoints());
-        roof.drawPolygon();
-        //Draws car roof
-        roof.fill();
-        
-        //Draws main body
-        
-        std::vector<std::pair <int,int>>bodyPoints;
-        Polygon body;
-        bodyPoints.push_back(std::pair<int, int>(335, 160));
-        bodyPoints.push_back(std::pair<int, int>(335, 110));
-        bodyPoints.push_back(std::pair<int, int>(185, 110));
-        bodyPoints.push_back(std::pair<int, int>(185, 160));
-        body.Translate(bodyPoints, xT, yT);
-        body.getPolygonPoints(body.Transformations::getPoints());
-        body.drawPolygon();
-        body.fill();
-        
-        
-        Ellipse doorHandle(200, 135,10,5);
-        doorHandle.Translate(doorHandle.getEllipseCenterPoints(), xT, yT);
-        doorHandle.buildEllipse(doorHandle.Transformations::getPoints());
-        doorHandle.fillEllipse();
-        
-        
-        
-        //Draws front body
-        
-        std::vector<std::pair <int,int>>frontPoints;
-        Polygon front;
-        frontPoints.push_back(std::pair<int, int>(330, 160));
-        frontPoints.push_back(std::pair<int, int>(415, 160));
-        frontPoints.push_back(std::pair<int, int>(405, 150));
-        frontPoints.push_back(std::pair<int, int>(405, 140));
-        frontPoints.push_back(std::pair<int, int>(415, 140));
-        frontPoints.push_back(std::pair<int, int>(405, 120));
-        frontPoints.push_back(std::pair<int, int>(330, 120));
-        front.Translate(frontPoints, xT, yT);
-        front.getPolygonPoints(front.Transformations::getPoints());
-        front.drawPolygon();
-        front.fill();
-        
-        
-        //Draws Rear body
-        
-        std::vector<std::pair <int,int>>rearPoints;
-        Polygon rear;
+//void problem10()
+//{
+//    Image info;
+//    info.createCanvas(320, 240, "255");
+//    info.uniformColor(255, 255, 255);
+//    
+//    Circle head(160,200,20);
+//    //head.fillCircle();
+//    info.Draw(head.getPoints(), 0, 0, 0);
+//    info.Draw(head.getFillPoints(), 255, 255, 0);
+//
+//    
+//    Line neck(160, 180,160,170);
+//   //cout << "neck size: " << neck.drawLine(neck.getInitialVertexPoints()).size() << endl;
+//    info.Draw(neck.drawLine(neck.getInitialVertexPoints()), 0, 0, 0);
+//    
+//    Polygon body;
+//    std::vector<std::pair <int,int>>polygonPoints;
+//    polygonPoints.push_back(std::pair<int, int>(130,170));
+//    polygonPoints.push_back(std::pair<int, int>(190,170));
+//    polygonPoints.push_back(std::pair<int, int>(190,110));
+//    polygonPoints.push_back(std::pair<int, int>(130,110));
+//    body.getPolygonPoints(polygonPoints);
+//    body.drawPolygon();
+//    body.fill();
+//    info.Draw(body.getFillPoints(), 0, 0, 255);
+//    info.Draw(body.getPoints(), 255, 0, 0);
+//
+//    Line rightArm(130,170, 100,100);
+//    info.Draw(rightArm.drawLine(rightArm.getInitialVertexPoints()), 0, 0, 0);
+//
+//    Line leftArm(190,170, 220,100);
+//    info.Draw(leftArm.drawLine(leftArm.getInitialVertexPoints()), 0, 0, 0);
+//    
+//    Circle rightHand(100,100,10);
+//    //rightHand.fillCircle();
+//    info.Draw(rightHand.getFillPoints(), 255, 0, 0);
+//    info.Draw(rightHand.getPoints(), 0, 255, 0);
+//
+//    
+//    Circle leftHand(220,100,10);
+//    //leftHand.fillCircle();
+//    info.Draw(leftHand.getFillPoints(), 255, 0, 0);
+//    info.Draw(leftHand.getPoints(), 0, 255, 0);
+//
+//    Line rightLeg(140,110,120,50);
+//    info.Draw(rightLeg.drawLine(rightLeg.getInitialVertexPoints()), 0, 0, 0);
+//
+//    Line leftLeg(180,110,200,50);
+//    info.Draw(leftLeg.drawLine(leftLeg.getInitialVertexPoints()), 0, 0, 0);
+//
+//    Ellipse rightFoot(120,50,20,5);
+//    rightFoot.fillEllipse();
+//    info.Draw(rightFoot.getFillPoints(), 0, 255, 0);
+//    info.Draw(rightFoot.getPoints(), 0, 0, 255);
+//    
+//    Ellipse leftFoot(200,50,20,5);
+//    leftFoot.fillEllipse();
+//    info.Draw(leftFoot.getFillPoints(), 0, 255, 0);
+//    info.Draw(leftFoot.getPoints(), 0, 0, 255);
+//
+//    Line pole(100,125, 100,50);
+//    Polygon flag;
+//    std::vector<std::pair <int,int>>flagPoints;
+//    flagPoints.push_back(std::pair<int, int>(100,125));
+//    flagPoints.push_back(std::pair<int, int>(100,95));
+//    flagPoints.push_back(std::pair<int, int>(60,110));
+//    flag.Translate(flagPoints, 0, 35);
+//    flag.Rotate(flag.Transformations::getPoints(), 100, 100, 45);
+//    flag.Scale(flag.Transformations::getPoints(), 100, 100, 1.25, 1.25);
+//    flag.getPolygonPoints(flag.Transformations::getPoints());
+//    flag.drawPolygon();
+//    flag.fill();
+//    
+//    pole.Translate(pole.getInitialVertexPoints(), 0, 35);
+//    pole.Rotate(pole.getPoints(), 100, 100, 45);
+//    pole.Scale(pole.getPoints(), 100, 100, 1.25, 1.25);
+//    
+//    info.Draw(pole.drawLine(pole.getPoints()), 0, 0, 0);
+//    
+//    info.Draw(flag.getPoints(), 0, 0, 0);
+//    info.Draw(flag.getFillPoints(), 255, 0, 255);
+//
+//    
+//    info.writePPM("problem10.ppm");
+//
+//
+//}
+//
+//void manAndCar()
+//{
+//    Image info;
+//    info.createCanvas(1000, 500, "255");
+//    info.uniformColor(245, 245, 245);
+//    
+//    int xT = 0;
+//    int yT = 0;
+//    double degrees = 0;
+//    double rotate = 0;
+//    Polygon grass;
+//    std::vector<std::pair <int,int>>grassPoints;
+//    grassPoints.push_back(std::pair<int, int>(0, 0));
+//    grassPoints.push_back(std::pair<int, int>(0, 250));
+//    grassPoints.push_back(std::pair<int, int>(1000, 250));
+//    grassPoints.push_back(std::pair<int, int>(1000, 0));
+//    grass.getPolygonPoints(grassPoints);
+//    grass.drawPolygon();
+//    grass.fill();
+//    info.Draw(grass.getFillPoints(), 44, 176, 55);
+//    info.Draw(grass.getPoints(), 44, 176, 55);
+//    
+//    Polygon sky;
+//    std::vector<std::pair <int,int>>skyPoints;
+//    skyPoints.push_back(std::pair<int, int>(0, 500));
+//    skyPoints.push_back(std::pair<int, int>(1000, 500));
+//    skyPoints.push_back(std::pair<int, int>(1000, 250));
+//    skyPoints.push_back(std::pair<int, int>(0, 250));
+//    sky.getPolygonPoints(skyPoints);
+//    sky.drawPolygon();
+//    sky.fill();
+//    info.Draw(sky.getFillPoints(), 0,191,255);
+//    info.Draw(sky.getPoints(), 0,191,255);
+//    
+//    Circle sun(900,400,35);
+//    sun.buildCircle(sun.getCircleCenterPoints());
+//    sun.fillCircle();
+//    
+//    Circle head(750,200,20);
+//    head.buildCircle(head.getCircleCenterPoints());
+//    head.fillCircle();
+//    Line neck(750, 180,750,170);
+//    
+//    Polygon humanBody;
+//    std::vector<std::pair <int,int>>humanBodyPoints;
+//    humanBodyPoints.push_back(std::pair<int, int>(720,170));
+//    humanBodyPoints.push_back(std::pair<int, int>(780,170));
+//    humanBodyPoints.push_back(std::pair<int, int>(780,110));
+//    humanBodyPoints.push_back(std::pair<int, int>(720,110));
+//    humanBody.getPolygonPoints(humanBodyPoints);
+//    humanBody.drawPolygon();
+//    humanBody.fill();
+//    Line rightLeg(730,110,710,50);
+//    Line leftLeg(770,110,790,50);
+//    Ellipse rightFoot(710,50,20,5);
+//    rightFoot.buildEllipse(rightFoot.getEllipseCenterPoints());
+//    rightFoot.fillEllipse();
+//    Ellipse leftFoot(790,50,20,5);
+//    leftFoot.buildEllipse(leftFoot.getEllipseCenterPoints());
+//    leftFoot.fillEllipse();
+//    
+//    for(int i =1;i<=95;i++)
+//    {
+//        info.uniformColor(245, 245, 245);
+//        double lineLength;
+//        
+//        std::vector<std::pair <int,int>>roofPoints;
+//        roofPoints.push_back(std::pair<int, int>(155, 160));
+//        roofPoints.push_back(std::pair<int, int>(200, 180));
+//        roofPoints.push_back(std::pair<int, int>(300, 180));
+//        roofPoints.push_back(std::pair<int, int>(320, 160));
+//        Polygon roof;
+//        roof.Translate(roofPoints, xT, yT);
+//        roof.getPolygonPoints(roof.Transformations::getPoints());
+//        roof.drawPolygon();
+//        //Draws car roof
+//        roof.fill();
+//        
+//        //Draws main body
+//        
+//        std::vector<std::pair <int,int>>bodyPoints;
+//        Polygon body;
+//        bodyPoints.push_back(std::pair<int, int>(335, 160));
+//        bodyPoints.push_back(std::pair<int, int>(335, 110));
+//        bodyPoints.push_back(std::pair<int, int>(185, 110));
+//        bodyPoints.push_back(std::pair<int, int>(185, 160));
+//        body.Translate(bodyPoints, xT, yT);
+//        body.getPolygonPoints(body.Transformations::getPoints());
+//        body.drawPolygon();
+//        body.fill();
+//        
+//        
+//        Ellipse doorHandle(200, 135,10,5);
+//        doorHandle.Translate(doorHandle.getEllipseCenterPoints(), xT, yT);
+//        doorHandle.buildEllipse(doorHandle.Transformations::getPoints());
+//        doorHandle.fillEllipse();
+//        
+//        
+//        
+//        //Draws front body
+//        
+//        std::vector<std::pair <int,int>>frontPoints;
+//        Polygon front;
+//        frontPoints.push_back(std::pair<int, int>(330, 160));
+//        frontPoints.push_back(std::pair<int, int>(415, 160));
+//        frontPoints.push_back(std::pair<int, int>(405, 150));
+//        frontPoints.push_back(std::pair<int, int>(405, 140));
+//        frontPoints.push_back(std::pair<int, int>(415, 140));
+//        frontPoints.push_back(std::pair<int, int>(405, 120));
+//        frontPoints.push_back(std::pair<int, int>(330, 120));
+//        front.Translate(frontPoints, xT, yT);
+//        front.getPolygonPoints(front.Transformations::getPoints());
+//        front.drawPolygon();
+//        front.fill();
+//        
+//        
+//        //Draws Rear body
+//        
+//        std::vector<std::pair <int,int>>rearPoints;
+//        Polygon rear;
         //cool back figure out later
         /*rearPoints.push_back(std::pair<int, int>(185, 110));
          rearPoints.push_back(std::pair<int, int>(85, 110));
@@ -1216,10 +1284,10 @@ void house3dPoints(int beta, int alpha, string problem, Coordinates vrpPoints)
 int main(int argc, const char * argv[]) {
     // insert code here...
 
-    threeDTransformations1();
-    threeDTransformations2();
-    threeDTransformations3();
-
+    //threeDTransformations1();
+    //threeDTransformations2();
+    //threeDTransformations3();
+    animation();
        return 0;
     
 }
